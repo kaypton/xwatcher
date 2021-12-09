@@ -1,0 +1,24 @@
+server:
+  port: ${PORT:8080}
+
+XMessaging:
+  NatsAddress: ${NATS_ADDRESS} # nats://222.201.144.196:4222
+
+Monitors:
+  Libvirt:
+    connection: ${LIBVIRT_CONNECTION:none} # qemu:///system
+  Netdata:
+    host: ${NETDATA_HOST:none} # 127.0.0.1:19999
+  XInspector:
+    host: ${XINSPECTOR_HOST:none} # http://127.0.0.1:20000
+  Docker:
+    host: ${DOCKER_HOST:none} # tcp://localhost:2376
+  Run:
+    monitors: ${ENABLE_MONITORS} # NetdataCpuOverloadMonitor,NetdataMemOverloadMonitor
+
+XLocalMonitor:
+  hostnameOverride: ${MY_HOSTNAME} # compute1
+  xapiserver: ${XAPISERVER_ADDRESS} # 127.0.0.1:8080
+  type: ${LOCALMONITOR_TYPE} # PhysicalMachine
+  address: ${BIND_ADDRESS} # 222.201.144.196
+  messages: ${MESSAGES_PATH} # /root/xwatcher/xlocalmonitor/messages

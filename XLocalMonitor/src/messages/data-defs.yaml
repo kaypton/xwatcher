@@ -1,0 +1,16 @@
+Kind: DataDef
+DataDefs:
+  - name: HostInfo
+    host: string
+    monitorId: string
+  - name: SystemRamStat
+    mem.total.KiB: long
+    mem.free.KiB: long
+    mem.available.KiB: long
+  - name: SystemCpuStat
+    cpu.core.num: int
+    cpu.system.usage: double
+    cpu.user.usage: double
+    cpu.total.usage: double
+
+

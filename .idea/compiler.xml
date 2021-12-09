@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="XDataFlowResourceMetric" />
+        <module name="XDashboard" />
+        <module name="XRegistry" />
+        <module name="XKubernetesAgent" />
+        <module name="XLocalMonitor" />
+        <module name="XCommon" />
+        <module name="XDataFlowTrace" />
+        <module name="XOpenStackAgent" />
+        <module name="XMessaging" />
+        <module name="XFunnel" />
+        <module name="XPlanner" />
+        <module name="XSniffer" />
+        <module name="XServerTopologyBuilder" />
+        <module name="XStrategy" />
+        <module name="XApiServer" />
+        <module name="XDeepStrategy" />
+      </profile>
+    </annotationProcessing>
+  </component>
+</project>

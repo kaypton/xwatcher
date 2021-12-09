@@ -1,0 +1,6 @@
+server:
+  port: ${PORT:8088}
+
+dashboard:
+  natsAddress: ${NATS_ADDRESS}
+  xregistryAddress: ${XREGISTRY_ADDRESS} # 222.201.144.196:8080

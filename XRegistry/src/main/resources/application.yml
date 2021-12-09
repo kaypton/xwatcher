@@ -1,0 +1,11 @@
+server:
+  port: ${PORT:8080}
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb://${MONGODB_ADDRESS:localhost:27017}/${MONGODB_DB:xregistry}
+
+XRegistry:
+  rpc:
+    natsAddress: ${NATS_ADDRESS}

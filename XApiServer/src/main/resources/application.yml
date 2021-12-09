@@ -1,0 +1,20 @@
+server:
+  port: ${PORT:7443}
+
+logging:
+  level:
+    root: ${LOGGING_LEVEL:INFO}
+
+XApiServer:
+  etcdPrefix: ${ETCD_PREFIX:/}
+
+Components:
+  etcd:
+    ca: ${ETCD_CA_FILE:none}
+    cert: ${ETCD_CERT_FILE:none}
+    key: ${ETCD_KEY_FILE:none}
+    endpoints: ${ETCD_ENDPOINTS}
+    client: ${ETCD_CLIENT:jetcd}
+    authType: ${AUTH_TYPE:password}
+    password: ${ETCD_PASSWORD:none}
+    user: ${ETCD_USER:none}

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/XApiServer/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/XApiServer/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/XCommon/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/XCommon/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/XDashboard/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/XDashboard/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/XDataFlowResourceMetric/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/XDataFlowResourceMetric/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/XDataFlowTrace/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/XDataFlowTrace/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/XDeepStrategy/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/XDeepStrategy/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/XFunnel/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/XFunnel/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/XKubernetesAgent/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/XKubernetesAgent/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/XLocalMonitor/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/XLocalMonitor/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/XMessaging/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/XMessaging/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/XOpenStackAgent/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/XOpenStackAgent/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/XPlanner/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/XPlanner/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/XRegistry/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/XRegistry/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/XServerTopologyBuilder/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/XServerTopologyBuilder/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/XSniffer/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/XSniffer/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/XStrategy/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/XStrategy/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
+  </component>
+</project>

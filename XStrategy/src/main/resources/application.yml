@@ -1,0 +1,9 @@
+server:
+  port: 8083
+
+XMessaging:
+  NatsAddress: ${NATS_ADDRESS} # nats://222.201.144.196:4222
+
+XStrategy:
+  XServerTopologyBuilderHost: ${SERVER_TOPOLOGY_BUILDER_HOST}  # 127.0.0.1:8081
+  XPlannerHost: ${PLANNER_HOST}  # 127.0.0.1:8081

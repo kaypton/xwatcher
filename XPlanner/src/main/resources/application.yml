@@ -1,0 +1,5 @@
+server:
+  port: ${PORT}
+
+XPlanner:
+  agentHosts: ${AGENTS}  # kubernetes=222.201.144.237:10000;openstack=125.216.243.14:5000

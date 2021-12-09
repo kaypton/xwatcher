@@ -1,0 +1,10 @@
+Kind: Stream
+Name: system.cpu.total.util
+TopicName: stream.system.cpu.total.util
+Data:
+  hostInfo: $HostInfo
+  value: double
+  timestamp: long
+#DataDefs:
+
+

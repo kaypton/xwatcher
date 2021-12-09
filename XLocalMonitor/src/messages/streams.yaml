@@ -1,0 +1,70 @@
+Kind: Stream
+Name: system.cpu.total.usage
+TopicName: stream.system.cpu.total.usage
+Data:
+  hostInfo: $HostInfo
+  value: double
+  timestamp: long
+
+
+---
+
+Kind: Stream
+Name: system.cpu.user.usage
+TopicName: stream.system.cpu.user.usage
+Data:
+  hostInfo: $HostInfo
+  value: double
+  timestamp: long
+
+
+---
+
+Kind: Stream
+Name: system.cpu.system.usage
+TopicName: stream.system.cpu.system.usage
+Data:
+  hostInfo: $HostInfo
+  value: double
+  timestamp: long
+
+
+---
+
+Kind: Stream
+Name: system.cpu.usage
+TopicName: stream.system.cpu.usage
+Data:
+  hostInfo: $HostInfo
+  value: $SystemCpuStat
+  timestamp: long
+
+
+---
+
+Kind: Stream
+Name: docker.cpu.usage
+TopicName: stream.docker.cpu.usage
+Data:
+  hostInfo: $HostInfo
+  total.cpu.usage: map # string: double
+  timestamp: long
+
+---
+
+Kind: Stream
+Name: docker.ram
+TopicName: stream.docker.ram
+Data:
+  hostInfo: $HostInfo
+  timestamp: long
+
+---
+
+Kind: Stream
+Name: system.ram
+TopicName: stream.system.ram
+Data:
+  hostInfo: $HostInfo
+  value: $SystemRamStat
+  timestamp: long
