@@ -14,12 +14,10 @@
         <module>XCommon</module>
         <module>XPlanner</module>
         <module>XSniffer</module>
-        <module>XFunnel</module>
         <module>XServerTopologyBuilder</module>
         <module>XOpenStackAgent</module>
         <module>XStrategy</module>
         <module>XDashboard</module>
-        <module>XRegistry</module>
         <module>XKubernetesAgent</module>
         <module>XDataFlowTrace</module>
         <module>XDataFlowResourceMetric</module>

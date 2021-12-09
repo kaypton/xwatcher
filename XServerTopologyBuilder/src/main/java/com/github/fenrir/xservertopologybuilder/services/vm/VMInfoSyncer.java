@@ -2,7 +2,6 @@ package com.github.fenrir.xservertopologybuilder.services.vm;
 
 import com.alibaba.fastjson.JSON;
 import com.github.fenrir.xcommon.message.stream.VMInfoStream;
-import com.github.fenrir.xfunnel.XFunnel;
 import com.github.fenrir.xmessaging.XMessage;
 import com.github.fenrir.xmessaging.MessageProcessCallBack;
 import lombok.Getter;
@@ -66,9 +65,6 @@ public class VMInfoSyncer {
         }
     }
 
-    public VMInfoSyncer(@Autowired VMTopologyService vmTopologyService,
-                        @Autowired XFunnel xFunnel){
-        xFunnel.listenStream("vm.info",
-                new StreamListener(vmTopologyService));
+    public VMInfoSyncer(@Autowired VMTopologyService vmTopologyService){
     }
 }

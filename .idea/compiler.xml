@@ -8,14 +8,12 @@
         <outputRelativeToContentRoot value="true" />
         <module name="XDataFlowResourceMetric" />
         <module name="XDashboard" />
-        <module name="XRegistry" />
         <module name="XKubernetesAgent" />
         <module name="XLocalMonitor" />
         <module name="XCommon" />
         <module name="XDataFlowTrace" />
         <module name="XOpenStackAgent" />
         <module name="XMessaging" />
-        <module name="XFunnel" />
         <module name="XPlanner" />
         <module name="XSniffer" />
         <module name="XServerTopologyBuilder" />
@@ -24,5 +22,9 @@
         <module name="XDeepStrategy" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="XFunnel" target="11" />
+      <module name="XRegistry" target="8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

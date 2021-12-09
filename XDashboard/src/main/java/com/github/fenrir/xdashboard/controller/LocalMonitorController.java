@@ -1,8 +1,6 @@
 package com.github.fenrir.xdashboard.controller;
 
 import com.github.fenrir.xcommon.clients.xlocalmonitor.entities.LocalMonitorOverview;
-import com.github.fenrir.xcommon.clients.xregistry.types.rest.BaseResponseMessage;
-import com.github.fenrir.xcommon.clients.xregistry.types.rest.LocalMonitorInfoResponseMessage;
 import com.github.fenrir.xdashboard.service.XLocalMonitorService;
 import com.github.fenrir.xdashboard.service.XRegistryService;
 import io.swagger.annotations.ApiOperation;
@@ -24,24 +22,6 @@ public class LocalMonitorController {
                                   @Autowired XLocalMonitorService xLocalMonitorService){
         this.xRegistryService = xRegistryService;
         this.xLocalMonitorService = xLocalMonitorService;
-    }
-
-    @ApiOperation("get all localmonitors' information")
-    @RequestMapping(
-            path = "/info/all",
-            method = RequestMethod.GET,
-            produces = "application/json; charset=utf-8")
-    public LocalMonitorInfoResponseMessage getAllLocalMonitor(){
-        return this.xRegistryService.getAllLocalMonitor();
-    }
-
-    @ApiOperation("delete a localmonitor's information by localmonitor's id")
-    @RequestMapping(
-            path = "/delete",
-            method = RequestMethod.GET,
-            produces = "application/json; charset=utf-8")
-    public BaseResponseMessage deleteLocalMonitorById(@RequestParam String id){
-        return this.xRegistryService.deleteLocalMonitor(id);
     }
 
     @ApiOperation("get overview by rpc server topic")

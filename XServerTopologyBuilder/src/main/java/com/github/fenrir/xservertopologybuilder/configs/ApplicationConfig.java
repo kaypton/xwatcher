@@ -1,8 +1,6 @@
 package com.github.fenrir.xservertopologybuilder.configs;
 
-import com.github.fenrir.xfunnel.XFunnel;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
@@ -18,11 +16,5 @@ public class ApplicationConfig {
         this.natsAddress = natsAddress;
         this.xregistryAddress = xregistryAddress;
         this.neo4jAddress = neo4jAddress;
-    }
-
-    @Bean
-    public XFunnel getXFunnel(){
-        // init XMessaging
-        return XFunnel.getInstance(this.natsAddress);
     }
 }
