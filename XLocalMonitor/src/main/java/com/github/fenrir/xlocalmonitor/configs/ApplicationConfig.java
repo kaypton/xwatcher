@@ -28,9 +28,7 @@ public class ApplicationConfig {
                              @Value("${XLocalMonitor.type}") String localMonitorTypeStr,
                              @Value("${XLocalMonitor.address}") String bindAddress,
                              @Value("${XMessaging.NatsAddress}") String natsAddress,
-                             @Value("${Monitors.Netdata.host}") String netdataHost,
                              @Value("${Monitors.Libvirt.connection}") String libvirtConnection,
-                             @Value("${Monitors.XInspector.host}") String xinspectorHost,
                              @Value("${Monitors.Docker.host}") String dockerDaemonHost,
                              @Value("${Monitors.Run.monitors}") String[] _enableMonitors,
                              @Value("${XLocalMonitor.messages}") String messagesPath){
