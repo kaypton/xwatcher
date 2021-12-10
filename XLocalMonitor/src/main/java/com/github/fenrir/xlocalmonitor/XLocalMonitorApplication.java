@@ -18,7 +18,6 @@ import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 @RpcServerScan(path = {"com.github.fenrir.xlocalmonitor.rpc"})
 @InspectorScan(path = {
         "com.github.fenrir.xlocalmonitor.inspectors.thirdpart.clients.cadvisorclient",
-        "com.github.fenrir.xlocalmonitor.inspectors.thirdpart.clients.netdataclient",
         "com.github.fenrir.xlocalmonitor.inspectors.thirdpart.clients.libvirtclient",
         "com.github.fenrir.xlocalmonitor.inspectors.thirdpart.clients.dockerclient",
 
@@ -26,9 +25,7 @@ import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
         "com.github.fenrir.xlocalmonitor.inspectors.local.cpu.linux.proc"
 })
 @MonitorScan(path = {
-        "com.github.fenrir.xlocalmonitor.monitors.hybrid",
         "com.github.fenrir.xlocalmonitor.monitors.libvirt",
-        "com.github.fenrir.xlocalmonitor.monitors.netdata",
         "com.github.fenrir.xlocalmonitor.monitors.oshi",
         "com.github.fenrir.xlocalmonitor.monitors.docker",
         "com.github.fenrir.xlocalmonitor.monitors.local"

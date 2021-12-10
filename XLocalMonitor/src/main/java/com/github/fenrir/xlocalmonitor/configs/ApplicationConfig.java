@@ -7,7 +7,6 @@ import com.github.fenrir.xlocalmonitor.XLocalMonitorApplication;
 import com.github.fenrir.xlocalmonitor.entities.MessageEntityFactory;
 import com.github.fenrir.xlocalmonitor.inspectors.thirdpart.clients.dockerclient.DockerAPI;
 import com.github.fenrir.xlocalmonitor.inspectors.thirdpart.clients.libvirtclient.LibvirtAPI;
-import com.github.fenrir.xlocalmonitor.inspectors.thirdpart.clients.netdataclient.NetdataAPI;
 import com.github.fenrir.xlocalmonitor.services.monitor.XLocalMonitorFactory;
 import com.github.fenrir.xmessaging.XMessaging;
 import org.slf4j.Logger;
@@ -37,7 +36,6 @@ public class ApplicationConfig {
                              @Value("${XLocalMonitor.messages}") String messagesPath){
 
         LibvirtAPI.setLibvirtConnectionURL(libvirtConnection);
-        NetdataAPI.setHost(netdataHost);
         DockerAPI.setHost(dockerDaemonHost);
 
         try{
