@@ -23,6 +23,7 @@
         <module>XDataFlowResourceMetric</module>
         <module>XDeepStrategy</module>
         <module>XApiServer</module>
+        <module>XServiceDependency</module>
     </modules>
 
     <properties>

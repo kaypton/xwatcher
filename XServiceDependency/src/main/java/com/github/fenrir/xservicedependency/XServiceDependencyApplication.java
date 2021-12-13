@@ -1,5 +1,6 @@
-package com.github.fenrir.xapiserver;
+package com.github.fenrir.xservicedependency;
 
+import com.github.fenrir.xservicedependency.services.ReceiveService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration;
@@ -12,10 +13,11 @@ import org.springframework.context.ConfigurableApplicationContext;
                 MongoDataAutoConfiguration.class
         }
 )
-public class XApiServerApplication {
+public class XServiceDependencyApplication {
     static public ConfigurableApplicationContext context;
 
     static public void main(String[] args){
-        context = SpringApplication.run(XApiServerApplication.class);
+        context = SpringApplication.run(XServiceDependencyApplication.class);
+        context.getBean(ReceiveService.class).startup();
     }
 }

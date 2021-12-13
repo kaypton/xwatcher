@@ -29,6 +29,8 @@
     <file url="file://$PROJECT_DIR$/XRegistry/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/XServerTopologyBuilder/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/XServerTopologyBuilder/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/XServiceDependency/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/XServiceDependency/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/XSniffer/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/XSniffer/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/XStrategy/src/main/java" charset="UTF-8" />

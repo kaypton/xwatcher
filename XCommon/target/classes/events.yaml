@@ -1,0 +1,9 @@
+kind: stream
+streamTopicName: stream.system.cpu.app.usage
+streamName: system.cpu.app.usage
+streamShortDescription: cpu application usage
+dataDefinitions:
+  - dataType: string
+    dataName: host
+  - dataType: double
+    dataName: value

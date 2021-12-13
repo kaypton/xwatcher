@@ -1,0 +1,9 @@
+server:
+  port: ${PORT:8080}
+
+XMessaging:
+  NatsAddress: ${NATS_ADDRESS} # nats://222.201.144.196:4222
+
+XServiceDependency:
+  traceData:
+    natsTopic: ${TRACE_DATA_NATS_TOPIC:none}
