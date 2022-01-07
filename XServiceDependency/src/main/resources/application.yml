@@ -7,3 +7,16 @@ XMessaging:
 XServiceDependency:
   traceData:
     natsTopic: ${TRACE_DATA_NATS_TOPIC:none}
+  prometheusJobName: ${PROMETHEUS_JOB_NAME}
+  influxdb:
+    influxdbUrl: http://222.201.144.237:8086
+    detail:
+      username: trainticket
+      password: trainticket
+      bucket: trainticket
+      org: emoslab
+      token: TJ7CSmQ7l0zig7a2ttJP3dL9raW0bUIt1lKC2r13O1oQ0yM8MSzHttV3OfTls9umrwe3lNtxJ7SxuZtnGpNpgQ==
+
+PrometheusClient:
+  host: http://222.201.144.237:9090
+  pushGatewayHost: 222.201.144.237:9091

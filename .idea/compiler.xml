@@ -7,18 +7,21 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="InfluxDBClient" />
+        <module name="PrometheusData" />
         <module name="XDataFlowResourceMetric" />
         <module name="XDashboard" />
         <module name="XServiceDependency" />
-        <module name="XKubernetesAgent" />
         <module name="XLocalMonitor" />
+        <module name="XHttpClient" />
         <module name="XCommon" />
         <module name="XDataFlowTrace" />
         <module name="XOpenStackAgent" />
+        <module name="PrometheusClient" />
         <module name="XMessaging" />
         <module name="XPlanner" />
+        <module name="XApiServerClient" />
         <module name="XSniffer" />
-        <module name="XServerTopologyBuilder" />
         <module name="XStrategy" />
         <module name="XApiServer" />
         <module name="XDeepStrategy" />
@@ -26,7 +29,10 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="XFunnel" target="11" />
+      <module name="XKubernetesAgent" target="8" />
+      <module name="XKubeServiceAutoscalerClient" target="11" />
       <module name="XRegistry" target="8" />
+      <module name="XServerTopologyBuilder" target="8" />
     </bytecodeTargetLevel>
   </component>
 </project>

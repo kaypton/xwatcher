@@ -6,6 +6,7 @@ import com.github.fenrir.xmessaging.XMessage;
 import com.github.fenrir.xmessaging.XMessaging;
 import com.github.fenrir.xmessaging.XMessagingListener;
 import com.github.fenrir.xservicedependency.XServiceDependencyApplication;
+import com.github.fenrir.xservicedependency.entities.serviceDependency.Span;
 import com.github.fenrir.xservicedependency.entities.trace.OpenTelemetryTraceData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,7 +44,7 @@ public class ReceiveService {
             if(traceStr != null){
                 OpenTelemetryTraceData traceData = JSON.parseObject(traceStr, OpenTelemetryTraceData.class);
                 processMessageExecutor.submit(()->{
-                    dependencyService.report(traceData);
+                    dependencyService.reportOtelTraceData(traceData);
                 });
             }
         }
@@ -58,7 +59,7 @@ public class ReceiveService {
         XMessaging xMessaging = XServiceDependencyApplication.context.getBean("xmessaging", XMessaging.class);
         this.listenerExecutor.submit(()->{
             XMessagingListener listener = xMessaging.getListener(natsTopic, new TraceDataProcessor(this.dependencyService));
-            listener.join();
+            listener.block();
         });
     }
 }

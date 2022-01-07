@@ -45,6 +45,12 @@
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.12.0</version>
+        </dependency>
+
         <!-- deep java library -->
         <dependency>
             <groupId>ai.djl</groupId>
@@ -54,9 +60,15 @@
 
         <dependency>
             <groupId>ai.djl.pytorch</groupId>
+            <artifactId>pytorch-engine</artifactId>
+            <version>0.14.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>ai.djl.pytorch</groupId>
             <artifactId>pytorch-native-auto</artifactId>
             <version>1.8.1</version>
-            <scope>runtime</scope>
+            <scope>compile</scope>
         </dependency>
 
         <dependency>

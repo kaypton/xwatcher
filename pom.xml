@@ -14,16 +14,19 @@
         <module>XCommon</module>
         <module>XPlanner</module>
         <module>XSniffer</module>
-        <module>XServerTopologyBuilder</module>
         <module>XOpenStackAgent</module>
         <module>XStrategy</module>
         <module>XDashboard</module>
-        <module>XKubernetesAgent</module>
-        <module>XDataFlowTrace</module>
-        <module>XDataFlowResourceMetric</module>
+        <module>flink/XDataFlowTrace</module>
+        <module>flink/XDataFlowResourceMetric</module>
         <module>XDeepStrategy</module>
         <module>XApiServer</module>
         <module>XServiceDependency</module>
+        <module>clients/XApiServerClient</module>
+        <module>clients/PrometheusClient</module>
+        <module>components/PrometheusData</module>
+        <module>clients/XHttpClient</module>
+        <module>clients/InfluxDBClient</module>
     </modules>
 
     <properties>
@@ -40,8 +43,7 @@
         <zipkin.server.version>2.12.9</zipkin.server.version>
         <snakeyaml.version>1.26</snakeyaml.version>
         <swagger.version>3.0.0</swagger.version>
-        <flink.version>1.13.3</flink.version>
-        <scala.binary.version>2.12</scala.binary.version>
+        <apache-commons.version>3.3.0</apache-commons.version>
 
         <project.build.sourceEncoding>
             UTF-8
@@ -50,12 +52,18 @@
 
     <dependencyManagement>
         <dependencies>
-            <dependency>
+            <!-- <dependency>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
                 <version>${springboot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency> -->
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>${springboot.version}</version>
             </dependency>
 
             <dependency>
@@ -124,12 +132,6 @@
                 <version>${openstack4j.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>io.zipkin.java</groupId>
-                <artifactId>zipkin-server</artifactId>
-                <version>${zipkin.server.version}</version>
-            </dependency>
-
             <!-- swagger -->
             <dependency>
                 <groupId>io.springfox</groupId>
@@ -154,26 +156,6 @@
                 <artifactId>jackson-core-asl</artifactId>
                 <version>1.9.13</version>
             </dependency>
-
-            <!-- flink -->
-            <dependency>
-                <groupId>org.apache.flink</groupId>
-                <artifactId>flink-scala_${scala.binary.version}</artifactId>
-                <version>${flink.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.apache.flink</groupId>
-                <artifactId>flink-streaming-scala_${scala.binary.version}</artifactId>
-                <version>${flink.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>org.apache.flink</groupId>
-                <artifactId>flink-clients_${scala.binary.version}</artifactId>
-                <version>${flink.version}</version>
-            </dependency>
-
         </dependencies>
     </dependencyManagement>
 

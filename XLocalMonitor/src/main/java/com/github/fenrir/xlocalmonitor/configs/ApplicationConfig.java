@@ -1,12 +1,13 @@
 package com.github.fenrir.xlocalmonitor.configs;
 
-import com.github.fenrir.xcommon.clients.xapiserver.api.rest.XApiServerRestClient;
-import com.github.fenrir.xcommon.clients.xapiserver.api.rest.responseEntities.api.v1.XLocalMonitorUpdateResponse;
+import com.github.fenrir.xapiserverclient.rest.XApiServerRestClient;
+import com.github.fenrir.xapiserverclient.rest.responseEntities.api.v1.XLocalMonitorUpdateResponse;
 import com.github.fenrir.xcommon.clients.xlocalmonitor.types.LocalMonitorType;
 import com.github.fenrir.xlocalmonitor.XLocalMonitorApplication;
 import com.github.fenrir.xlocalmonitor.entities.MessageEntityFactory;
 import com.github.fenrir.xlocalmonitor.inspectors.thirdpart.clients.dockerclient.DockerAPI;
 import com.github.fenrir.xlocalmonitor.inspectors.thirdpart.clients.libvirtclient.LibvirtAPI;
+import com.github.fenrir.xlocalmonitor.services.monitor.XLocalMonitorExecutor;
 import com.github.fenrir.xlocalmonitor.services.monitor.XLocalMonitorFactory;
 import com.github.fenrir.xmessaging.XMessaging;
 import org.slf4j.Logger;
@@ -90,14 +91,15 @@ public class ApplicationConfig {
             count++;
         }while(xLocalMonitorUpdateResponse == null);
 
-        String lmUUID = xLocalMonitorUpdateResponse.getRpcServerTopic();
+        String rpcServerTopic = xLocalMonitorUpdateResponse.getRpcServerTopic();
 
         XMessaging.init(natsAddress);
 
         try {
             XLocalMonitorFactory.init(XLocalMonitorApplication.class,
                     hostname == null ? InetAddress.getLocalHost().getHostName() : hostname,
-                    lmUUID);
+                    rpcServerTopic);
+            XLocalMonitorExecutor.startup();
         } catch (UnknownHostException e) {
             e.printStackTrace();
             LOGGER.error(e.getMessage());

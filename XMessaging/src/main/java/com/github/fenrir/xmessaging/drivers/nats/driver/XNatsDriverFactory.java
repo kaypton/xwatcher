@@ -37,7 +37,7 @@ public class XNatsDriverFactory implements Serializable {
      */
     public static XMessagingListener createListener(String topic){
         XNatsListener subscriber = XNatsListener.create(getNatsServerAddresses(),
-                topic, XNatsSettings.ConsumeMode.Receive, null);
+                topic, XNatsSettings.ConsumeMode.SYNC, null);
         subscriber.run();
         return subscriber;
     }
@@ -51,7 +51,7 @@ public class XNatsDriverFactory implements Serializable {
     public static XMessagingListener createListener(String topic,
                                              MessageProcessCallBack messageProcessCallBack){
         XNatsListener subscriber = XNatsListener.create(getNatsServerAddresses(),
-                topic, XNatsSettings.ConsumeMode.CallBack, messageProcessCallBack);
+                topic, XNatsSettings.ConsumeMode.ASYNC, messageProcessCallBack);
         subscriber.run();
         return subscriber;
     }
@@ -78,7 +78,7 @@ public class XNatsDriverFactory implements Serializable {
 
     public XMessagingListener getListener(String topic){
         XNatsListener subscriber = XNatsListener.create(this._natsServerAddress,
-                topic, XNatsSettings.ConsumeMode.Receive, null);
+                topic, XNatsSettings.ConsumeMode.SYNC, null);
         subscriber.run();
         return subscriber;
     }
@@ -86,7 +86,7 @@ public class XNatsDriverFactory implements Serializable {
     public XMessagingListener getListener(String topic,
                                           MessageProcessCallBack callBack){
         XNatsListener subscriber = XNatsListener.create(this._natsServerAddress,
-                topic, XNatsSettings.ConsumeMode.CallBack, callBack);
+                topic, XNatsSettings.ConsumeMode.ASYNC, callBack);
         subscriber.run();
         return subscriber;
     }

@@ -31,9 +31,9 @@ public class XNatsListener extends XNatsDriverBase implements XMessagingListener
                           MessageProcessCallBack messageProcessCallBack){
         super(natsServerAddresses, topic, consumeMode, null);
 
-        if(consumeMode == XNatsSettings.ConsumeMode.Receive)
+        if(consumeMode == XNatsSettings.ConsumeMode.SYNC)
             this.setReceiveQueue(new LinkedBlockingQueue<>());
-        else if(consumeMode == XNatsSettings.ConsumeMode.CallBack)
+        else if(consumeMode == XNatsSettings.ConsumeMode.ASYNC)
             this.setMessageProcessCallBack(messageProcessCallBack);
     }
 
@@ -53,11 +53,10 @@ public class XNatsListener extends XNatsDriverBase implements XMessagingListener
 
     public void run(){
         this.runReceiver(this.getReceiveQueue(),
-                this.getMessageProcessCallBack(),
-                1000);
+                this.getMessageProcessCallBack());
     }
 
-    public void join(){
+    public void block(){
         try {
             this.getReceivingThread().join();
         } catch (InterruptedException e) {

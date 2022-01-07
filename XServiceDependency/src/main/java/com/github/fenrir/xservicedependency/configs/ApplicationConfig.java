@@ -13,10 +13,14 @@ import org.springframework.context.annotation.Configuration;
 public class ApplicationConfig {
     static private final Logger LOGGER = LoggerFactory.getLogger(ApplicationConfig.class);
 
-    public XMessaging xMessaging = null;
+    public XMessaging xMessaging;
+
+    static public String prometheusJobName;
 
     public ApplicationConfig(@Value("${XServiceDependency.traceData.natsTopic}") String traceDataNatsTopic,
-                             @Value("${XMessaging.NatsAddress}") String natsAddress){
+                             @Value("${XMessaging.NatsAddress}") String natsAddress,
+                             @Value("${XServiceDependency.prometheusJobName}") String _prometheusJobName){
+        prometheusJobName = _prometheusJobName;
         if(!traceDataNatsTopic.equals("none")) {
             ReceiveService.natsTopic = traceDataNatsTopic;
             LOGGER.info("trace data nats topic:{}", traceDataNatsTopic);

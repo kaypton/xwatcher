@@ -19,7 +19,7 @@ public class XMessage {
     private CompletableFuture<Message> natsRawFutureMessage;
     private RawType rawType;
 
-    public XMessage(Message rawMessage) {
+    private XMessage(Message rawMessage) {
         this.natsRawMessage = rawMessage;
         this.rawType = RawType.NATS;
     }
@@ -48,10 +48,18 @@ public class XMessage {
     }
 
     public String getStringData(){
-        return new String(this.natsRawMessage.getData(), StandardCharsets.UTF_8);
+        if(this.rawType == RawType.NATS)
+            return new String(this.natsRawMessage.getData(), StandardCharsets.UTF_8);
+        else return null;
     }
 
     public JSONObject getJSONObjectFromData(){
-        return JSON.parseObject(new String(this.natsRawMessage.getData(), StandardCharsets.UTF_8));
+        if(this.rawType == RawType.NATS)
+            return JSON.parseObject(new String(this.natsRawMessage.getData(), StandardCharsets.UTF_8));
+        else return null;
+    }
+
+    public static XMessage create(Message msg){
+        return new XMessage(msg);
     }
 }

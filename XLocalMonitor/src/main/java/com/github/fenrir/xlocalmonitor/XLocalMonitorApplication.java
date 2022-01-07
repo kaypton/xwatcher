@@ -1,6 +1,5 @@
 package com.github.fenrir.xlocalmonitor;
 
-import com.github.fenrir.xcommon.message.annotations.MsgDefinitionScan;
 import com.github.fenrir.xlocalmonitor.annotations.InspectorScan;
 import com.github.fenrir.xlocalmonitor.annotations.MonitorScan;
 import com.github.fenrir.xmessaging.rpc.annotation.RpcServerScan;
@@ -8,13 +7,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration;
 import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
+import org.springframework.context.ConfigurableApplicationContext;
 
-@MsgDefinitionScan(
-    path = {
-            "com.github.fenrir.xcommon.message.event",
-            "com.github.fenrir.xcommon.message.stream"
-    }
-)
 @RpcServerScan(path = {"com.github.fenrir.xlocalmonitor.rpc"})
 @InspectorScan(path = {
         "com.github.fenrir.xlocalmonitor.inspectors.thirdpart.clients.cadvisorclient",
@@ -25,8 +19,6 @@ import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
         "com.github.fenrir.xlocalmonitor.inspectors.local.cpu.linux.proc"
 })
 @MonitorScan(path = {
-        "com.github.fenrir.xlocalmonitor.monitors.libvirt",
-        "com.github.fenrir.xlocalmonitor.monitors.oshi",
         "com.github.fenrir.xlocalmonitor.monitors.docker",
         "com.github.fenrir.xlocalmonitor.monitors.local"
 })
@@ -34,10 +26,16 @@ import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
         exclude = {  // exclude MongoDB auto configuration
                 MongoAutoConfiguration.class,
                 MongoDataAutoConfiguration.class
+        },
+        scanBasePackages = {
+                "com.github.fenrir.xlocalmonitor",
+                "com.github.fenrir.prometheusdata"
         }
 )
 public class XLocalMonitorApplication {
+    private static ConfigurableApplicationContext context;
+
     public static void main(String[] args){
-        SpringApplication.run(XLocalMonitorApplication.class);
+        context = SpringApplication.run(XLocalMonitorApplication.class);
     }
 }

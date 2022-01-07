@@ -7,14 +7,12 @@
     <file url="file://$PROJECT_DIR$/XCommon/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/XDashboard/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/XDashboard/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/XDataFlowResourceMetric/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/XDataFlowResourceMetric/src/main/resources" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/XDataFlowTrace/src/main/java" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/XDataFlowTrace/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/XDeepStrategy/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/XDeepStrategy/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/XFunnel/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/XFunnel/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/XHttpClient/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/XHttpClient/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/XKubernetesAgent/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/XKubernetesAgent/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/XLocalMonitor/src/main/java" charset="UTF-8" />
@@ -35,6 +33,22 @@
     <file url="file://$PROJECT_DIR$/XSniffer/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/XStrategy/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/XStrategy/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/clients/InfluxDBClient/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/clients/InfluxDBClient/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/clients/PrometheusClient/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/clients/PrometheusClient/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/clients/XApiServerClient/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/clients/XApiServerClient/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/clients/XHttpClient/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/clients/XHttpClient/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/clients/XKubeServiceAutoscalerClient/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/clients/XKubeServiceAutoscalerClient/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/components/PrometheusData/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/components/PrometheusData/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/flink/XDataFlowResourceMetric/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/flink/XDataFlowResourceMetric/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/flink/XDataFlowTrace/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/flink/XDataFlowTrace/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
   </component>

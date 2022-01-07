@@ -58,18 +58,6 @@
         </dependency>
 
         <dependency>
-            <groupId>com.github.fenrir</groupId>
-            <artifactId>XMessaging</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>com.github.fenrir</groupId>
-            <artifactId>XCommon</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
             <groupId>args4j</groupId>
             <artifactId>args4j</artifactId>
         </dependency>
@@ -113,6 +101,38 @@
             <groupId>com.github.docker-java</groupId>
             <artifactId>docker-java-transport-httpclient5</artifactId>
             <version>${docker-java.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.fenrir</groupId>
+            <artifactId>XMessaging</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-simple</artifactId>
+                </exclusion>
+            </exclusions>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.fenrir</groupId>
+            <artifactId>XCommon</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.fenrir</groupId>
+            <artifactId>PrometheusData</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.fenrir</groupId>
+            <artifactId>XApiServerClient</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>compile</scope>
         </dependency>
 
     </dependencies>

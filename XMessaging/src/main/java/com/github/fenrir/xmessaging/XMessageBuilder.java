@@ -67,17 +67,17 @@ public class XMessageBuilder {
         this.topic = topic;
     }
 
-    public XMessage buildNatsMessage(){
+    public XMessage buildNatsMessage() {
         Headers headers = new Headers();
-        for(String key : this.getHeaders().keySet()){
+        for (String key : this.getHeaders().keySet()) {
             headers.add(key, this.getHeaders().get(key));
         }
 
-        for(String key : this.getCHeaders().keySet()){
+        for (String key : this.getCHeaders().keySet()) {
             headers.add(key, this.getCHeaders().get(key));
         }
 
-        for(String key : this.getLHeaders().keySet()){
+        for (String key : this.getLHeaders().keySet()) {
             headers.add(key, this.getLHeaders().get(key));
         }
 
@@ -87,7 +87,7 @@ public class XMessageBuilder {
                 .headers(headers)
                 .build();
 
-        return new XMessage(msg);
+        return XMessage.create(msg);
     }
 
     static public XMessageBuilder builder(String topic){

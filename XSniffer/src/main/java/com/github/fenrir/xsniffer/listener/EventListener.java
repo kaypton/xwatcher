@@ -1,7 +1,5 @@
 package com.github.fenrir.xsniffer.listener;
 
-import com.github.fenrir.xcommon.message.MessageFactory;
-import com.github.fenrir.xcommon.message.event.BaseEvent;
 import com.github.fenrir.xmessaging.XMessage;
 import com.github.fenrir.xmessaging.XMessaging;
 import com.github.fenrir.xmessaging.XMessagingListener;
@@ -44,6 +42,6 @@ public class EventListener implements Runnable {
                 XMessaging.createListener(this.getEventTopicName(),
                         new SnifferEventListenerCallback(this.getExporter()));
         logger.info(Thread.currentThread().getName() + "listening ... ");
-        listener.join();
+        listener.block();
     }
 }

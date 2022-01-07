@@ -3,17 +3,17 @@ package com.github.fenrir.xservicedependency.entities.trace;
 public class OpenTelemetryTraceData {
 
     public static class Event {
-        public String timeUnixNano;
+        public Double timeUnixNano;
         public String name;
     }
 
     public static class Span {
         public String traceId;
         public String spanId;
-        public String endTimeUnixNano;
+        public Double endTimeUnixNano;
         public String kind;
         public String name;
-        public String startTimeUnixNano;
+        public Double startTimeUnixNano;
         public String parentSpanId;
         public Event[] events;
     }

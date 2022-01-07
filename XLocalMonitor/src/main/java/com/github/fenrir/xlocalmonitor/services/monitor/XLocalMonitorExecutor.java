@@ -37,14 +37,16 @@ public class XLocalMonitorExecutor {
 
     public XLocalMonitorExecutor(@Autowired PipelineContainer pipelineContainer){
         this.setPipelineContainer(pipelineContainer);
+    }
 
+    public static void startup(){
         if(ApplicationConfig.enableMonitors == null){
             logger.info("None monitor has been enabled");
         }else{
             for(String monitorName : ApplicationConfig.enableMonitors){
                 BaseMonitor monitor = XLocalMonitorFactory.getMonitorInstanceFromName(monitorName);
-                monitor.setPipelineContainer(this.getPipelineContainer());
-                this.execute(monitor);
+                // monitor.setPipelineContainer(this.getPipelineContainer());
+                execute(monitor);
             }
         }
     }
@@ -53,7 +55,7 @@ public class XLocalMonitorExecutor {
         return executor.getActiveCount();
     }
 
-    private void execute(BaseMonitor monitor){
+    private static void execute(BaseMonitor monitor){
         executor.execute(monitor);
     }
 

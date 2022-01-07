@@ -89,7 +89,7 @@ public class XNatsDriverBase {
     protected XMessage publishAndWaitReply(Message msg){
         try {
             Message _msg = this.natsConnection.request(msg).get();
-            return new XMessage(_msg);
+            return XMessage.create(_msg);
         } catch (InterruptedException | ExecutionException e) {
             e.printStackTrace();
             LOGGER.error(e.getMessage());
@@ -103,82 +103,35 @@ public class XNatsDriverBase {
     }
 
     protected void runReceiver(BlockingQueue<XMessage> receiveQueue,
-                               MessageProcessCallBack messageProcessCallBack,
-                               Integer durationMs){
-        Subscription subscription = this.natsConnection.subscribe(this.getTopic());
-        this.setReceivingThread(new Receiver(
-                receiveQueue, subscription, durationMs, messageProcessCallBack, this.getConsumeMode()
-        ));
-
-        this.setReceivingThreadId(this.getReceivingThread().getId());
-        this.getReceivingThread().start();
+                               MessageProcessCallBack messageProcessCallBack){
+        Dispatcher dispatcher = this.natsConnection.createDispatcher(
+                        new NatsDispatcherHandler(
+                                receiveQueue,
+                                messageProcessCallBack,
+                                this.getConsumeMode()))
+                .subscribe(this.getTopic());
     }
 
-    private static class Receiver extends Thread {
-
-        /**
-         * receive queue
-         */
-        private final BlockingQueue<XMessage> queue;
-
-        /**
-         * nats subscription
-         */
-        private final Subscription subscription;
-
-        /**
-         * duration
-         */
-        private final Integer durationMs;
-
-        /**
-         * thread stop flag
-         */
-        private Boolean stopFlag = false;
-
-        /**
-         * message process callback
-         */
+    private static class NatsDispatcherHandler implements MessageHandler{
         private final MessageProcessCallBack messageProcessCallBack;
-
-        /**
-         * consume mode
-         */
+        private final BlockingQueue<XMessage> queue;
         private final XNatsSettings.ConsumeMode consumeMode;
 
-        public Receiver(BlockingQueue<XMessage> queue,
-                        Subscription subscription,
-                        Integer durationMs,
-                        MessageProcessCallBack messageProcessCallBack,
-                        XNatsSettings.ConsumeMode consumeMode){
-            this.queue = queue;
-            this.subscription = subscription;
-            this.durationMs = durationMs;
+        public NatsDispatcherHandler(BlockingQueue<XMessage> queue,
+                                     MessageProcessCallBack messageProcessCallBack,
+                                     XNatsSettings.ConsumeMode consumeMode){
             this.messageProcessCallBack = messageProcessCallBack;
+            this.queue = queue;
             this.consumeMode = consumeMode;
         }
-
         @Override
-        public void run(){
-            while(!this.stopFlag){
-                try {
-                    Message msg = this.subscription.nextMessage(Duration.ofMillis(this.durationMs));
-                    if(msg != null){
-                        XMessage natsMessage = new XMessage(msg);
-                        if(this.consumeMode == XNatsSettings.ConsumeMode.CallBack){
-                            this.messageProcessCallBack.processMessage(natsMessage);
-                        }else if(this.consumeMode == XNatsSettings.ConsumeMode.Receive){
-                            this.queue.put(natsMessage);
-                        }
-                    }
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+        public void onMessage(Message msg) throws InterruptedException {
+            XMessage message = XMessage.create(msg);
+            if(this.consumeMode == XNatsSettings.ConsumeMode.ASYNC && this.messageProcessCallBack != null){
+                this.messageProcessCallBack.processMessage(message);
+            }else if(this.consumeMode == XNatsSettings.ConsumeMode.SYNC && this.queue != null){
+                this.queue.put(message);
             }
-        }
-
-        public void stopReceiver(){
-            this.stopFlag = true;
         }
     }
 }

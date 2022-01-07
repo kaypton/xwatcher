@@ -6,7 +6,7 @@ import com.github.fenrir.xlocalmonitor.annotations.Monitor;
 import com.github.fenrir.xlocalmonitor.entities.MessageBuilder;
 import com.github.fenrir.xlocalmonitor.inspectors.local.memory.linux.MemInfo;
 import com.github.fenrir.xlocalmonitor.monitors.BaseMonitor;
-import com.github.fenrir.xlocalmonitor.services.prometheus.*;
+import com.github.fenrir.prometheusdata.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -16,7 +16,7 @@ import java.util.*;
         streams = {"system.ram"},
         inspectors = {"linux.meminfo"})
 public class MemoryMonitor extends BaseMonitor {
-    private static final Logger logger = LoggerFactory.getLogger("MemoryMonitor");
+    private static final Logger logger = LoggerFactory.getLogger(MemoryMonitor.class);
 
     private MemInfo memInfo;
     private Map<String, Map<String, Object>> lastMetric;
@@ -109,6 +109,7 @@ public class MemoryMonitor extends BaseMonitor {
 
     @Override
     protected void doStart() {
+        logger.info("start ...");
         this.registerTimerTask(new MemoryMonitorTimerTask(this.memInfo, this),
                 (long) 1000);
     }
@@ -161,7 +162,7 @@ public class MemoryMonitor extends BaseMonitor {
     }
 
     public GetDataMethod getDataMethod(){
-        return (metricName, params) -> {
+        return (metricName, extensions) -> {
 
             MemInfo memInfo = (MemInfo) this.apiMap.get("linux.meminfo");
             memInfo.refresh();

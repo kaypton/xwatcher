@@ -5,9 +5,11 @@ import com.github.fenrir.xlocalmonitor.annotations.Monitor;
 import com.github.fenrir.xlocalmonitor.entities.MessageBuilder;
 import com.github.fenrir.xlocalmonitor.inspectors.local.cpu.linux.proc.Stat;
 import com.github.fenrir.xlocalmonitor.monitors.BaseMonitor;
-import com.github.fenrir.xlocalmonitor.services.prometheus.*;
+import com.github.fenrir.prometheusdata.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,6 +23,7 @@ import java.util.concurrent.ConcurrentHashMap;
                    "system.cpu.usage"},
         inspectors = {"linux.stat"})
 public class CpuUsageMonitor extends BaseMonitor {
+    private static final Logger LOGGER = LoggerFactory.getLogger(CpuUsageMonitor.class);
 
     private Stat stat;
     private final Map<String, Map<String, Object>> lastMetric = new ConcurrentHashMap<>();
@@ -139,6 +142,7 @@ public class CpuUsageMonitor extends BaseMonitor {
 
     @Override
     protected void doStart() {
+        LOGGER.info("start ...");
         this.registerTimerTask(new CpuUsageMonitorTimerTask(this.stat, this, this.lastMetric),
                 (long) 1000);
     }
@@ -204,7 +208,7 @@ public class CpuUsageMonitor extends BaseMonitor {
     }
 
     public GetDataMethod getDataMethod(){
-        return (metricName, params) -> {
+        return (metricName, extensions) -> {
             switch (metricName) {
                 case "system_cpu_total_usage":
                     if(this.lastMetric.containsKey("system.cpu.total.usage"))

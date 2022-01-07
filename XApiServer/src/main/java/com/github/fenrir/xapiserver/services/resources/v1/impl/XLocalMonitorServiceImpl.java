@@ -8,9 +8,9 @@ import com.github.fenrir.xapiserver.components.etcd.responseEntities.EtcdGetResp
 import com.github.fenrir.xapiserver.configs.ApplicationConfig;
 import com.github.fenrir.xapiserver.resources.v1.XLocalMonitor;
 import com.github.fenrir.xapiserver.services.resources.v1.XLocalMonitorService;
-import com.github.fenrir.xcommon.clients.xapiserver.api.rest.responseEntities.api.v1.XLocalMonitorDeleteResponse;
-import com.github.fenrir.xcommon.clients.xapiserver.api.rest.responseEntities.api.v1.XLocalMonitorGetResponse;
-import com.github.fenrir.xcommon.clients.xapiserver.api.rest.responseEntities.api.v1.XLocalMonitorUpdateResponse;
+import com.github.fenrir.xapiserverclient.rest.responseEntities.api.v1.XLocalMonitorDeleteResponse;
+import com.github.fenrir.xapiserverclient.rest.responseEntities.api.v1.XLocalMonitorGetResponse;
+import com.github.fenrir.xapiserverclient.rest.responseEntities.api.v1.XLocalMonitorUpdateResponse;
 import com.github.fenrir.xcommon.utils.CommonUtils;
 import org.springframework.stereotype.Service;
 

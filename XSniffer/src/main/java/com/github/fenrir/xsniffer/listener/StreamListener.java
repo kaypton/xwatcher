@@ -1,7 +1,5 @@
 package com.github.fenrir.xsniffer.listener;
 
-import com.github.fenrir.xcommon.message.MessageFactory;
-import com.github.fenrir.xcommon.message.stream.BaseStream;
 import com.github.fenrir.xmessaging.*;
 import com.github.fenrir.xsniffer.exporter.Exporter;
 import lombok.Getter;
@@ -40,6 +38,6 @@ public class StreamListener implements Runnable {
         XMessagingListener listener = XMessaging.createListener(this.getStreamTopicName(),
                 new SnifferStreamListenerCallback(this.getExporter()));
         logger.info("listening ...");
-        listener.join();
+        listener.block();
     }
 }

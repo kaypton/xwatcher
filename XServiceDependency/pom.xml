@@ -23,6 +23,13 @@
         </dependency>
 
         <dependency>
+            <groupId>com.influxdb</groupId>
+            <artifactId>influxdb-client-java</artifactId>
+            <version>4.0.0</version>
+        </dependency>
+
+
+        <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
         </dependency>
@@ -30,6 +37,18 @@
         <dependency>
             <groupId>com.github.fenrir</groupId>
             <artifactId>XMessaging</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-simple</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.fenrir</groupId>
+            <artifactId>PrometheusClient</artifactId>
             <version>1.0-SNAPSHOT</version>
             <exclusions>
                 <exclusion>

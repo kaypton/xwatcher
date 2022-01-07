@@ -1,0 +1,3 @@
+PrometheusClient:
+  host: http://222.201.144.237:9090
+  pushGatewayHost: 222.201.144.237:9091

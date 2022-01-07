@@ -1,9 +1,5 @@
 package com.github.fenrir.xlocalmonitor.services.monitor;
 
-import com.github.fenrir.xcommon.message.MessageFactory;
-import com.github.fenrir.xcommon.message.annotations.MsgDefinitionScan;
-import com.github.fenrir.xcommon.message.event.BaseEvent;
-import com.github.fenrir.xcommon.message.stream.BaseStream;
 import com.github.fenrir.xlocalmonitor.annotations.Inspector;
 import com.github.fenrir.xlocalmonitor.annotations.InspectorScan;
 import com.github.fenrir.xlocalmonitor.annotations.Monitor;
@@ -27,7 +23,7 @@ public class XLocalMonitorFactory {
     static private final Map<String, String[]> monitorStreamMap = new ConcurrentHashMap<>();
     static private final Map<String, String[]> monitorEventMap = new ConcurrentHashMap<>();
     static private final Map<String, String[]> monitorInspectorMap = new ConcurrentHashMap<>();
-    static private MessageFactory messageFactory;
+
     static private String _hostname;
 
     static public String getHostname(){
@@ -43,10 +39,6 @@ public class XLocalMonitorFactory {
 
         InspectorScan inspectorScan = anyClazz.getDeclaredAnnotation(InspectorScan.class);
         String[] inspectorScanPath = inspectorScan.path();
-
-        MsgDefinitionScan msgDefinitionScan = anyClazz.getDeclaredAnnotation(MsgDefinitionScan.class);
-        String[] msgDefinitionPath = msgDefinitionScan.path();
-        messageFactory = MessageFactory.create(msgDefinitionPath);
 
         // scan inspectors
         for(String path : inspectorScanPath){
@@ -148,13 +140,5 @@ public class XLocalMonitorFactory {
 
     static public String[] getMonitorInspectors(String monitorName){
         return monitorInspectorMap.getOrDefault(monitorName, null);
-    }
-
-    static public BaseEvent getEvent(String eventName){
-        return messageFactory.getEvent(eventName);
-    }
-
-    static public BaseStream getStream(String streamName){
-        return messageFactory.getStream(streamName);
     }
 }

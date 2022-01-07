@@ -2,19 +2,19 @@ package com.github.fenrir.xlocalmonitor.monitors;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-import com.github.fenrir.xcommon.message.event.BaseEvent;
-import com.github.fenrir.xcommon.message.stream.BaseStream;
+import com.github.fenrir.xcommon.utils.Tuple2;
 import com.github.fenrir.xlocalmonitor.entities.MessageEntity;
 import com.github.fenrir.xlocalmonitor.entities.MessageEntityFactory;
-import com.github.fenrir.xlocalmonitor.services.monitor.XLocalMonitorFactory;
 import com.github.fenrir.xlocalmonitor.services.pipeline.PipelineContainer;
-import com.github.fenrir.xlocalmonitor.services.prometheus.DataContainerService;
 import com.github.fenrir.xmessaging.XMessaging;
 import com.github.fenrir.xmessaging.XMessagingPublisher;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.*;
+import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 public abstract class BaseMonitor implements Runnable {
 
@@ -23,11 +23,15 @@ public abstract class BaseMonitor implements Runnable {
     @Getter protected String uuid;
     @Getter protected String hostname;
 
-    private final Map<String, List<Object>> streamMap = new HashMap<>();
-    private final Map<String, List<Object>> eventMap = new HashMap<>();
+    private final Map<String, Tuple2<XMessagingPublisher, XMessagingPublisher>> streamMap = new HashMap<>();
+    private final Map<String, Tuple2<XMessagingPublisher, XMessagingPublisher>> eventMap = new HashMap<>();
+
     private final Collection<Timer> timerCollection = new HashSet<>();
 
     @Getter @Setter private PipelineContainer pipelineContainer = null;
+
+    private ThreadPoolExecutor dataPushingExecutor =
+            new ThreadPoolExecutor(10, 100, 3, TimeUnit.SECONDS, new LinkedBlockingDeque<>());
 
     public BaseMonitor(){}
 
@@ -59,12 +63,10 @@ public abstract class BaseMonitor implements Runnable {
 
         if(streamEntity == null) return;
 
-        List<Object> list = new ArrayList<>();
-        list.add(streamEntity);
-        list.add(XMessaging.createPublisher(streamEntity.topicName));
-        list.add(XMessaging.createPublisher(uuid + "." + streamEntity.topicName));
-
-        this.streamMap.put(streamName, list);
+        this.streamMap.put(streamName, new Tuple2<>(
+                XMessaging.createPublisher(streamEntity.topicName),
+                XMessaging.createPublisher(uuid + "." + streamEntity.topicName)
+        ));
     }
 
     public void registerEvent(String eventName){
@@ -72,28 +74,10 @@ public abstract class BaseMonitor implements Runnable {
 
         if(eventEntity == null) return;
 
-        List<Object> list = new ArrayList<>();
-        list.add(eventEntity);
-        list.add(XMessaging.createPublisher(eventEntity.topicName));
-        list.add(XMessaging.createPublisher(uuid + "." + eventEntity.topicName));
-
-        this.eventMap.put(eventName, list);
-    }
-
-    protected Map<String, String> createStreamData(String streamName, Object... params){
-        List<Object> list = this.streamMap.get(streamName);
-        if(list != null){
-            BaseStream stream = (BaseStream) list.get(0);
-            return stream.createStreamUnit(this.getUuid(), params);
-        }else return null;
-    }
-
-    protected Map<String, String> createEventData(String eventName, Object... params){
-        List<Object> list = this.eventMap.get(eventName);
-        if(list != null){
-            BaseEvent event = (BaseEvent) list.get(0);
-            return event.createEvent(this.getUuid(), params);
-        }else return null;
+        this.eventMap.put(eventName, new Tuple2<>(
+                XMessaging.createPublisher(eventEntity.topicName),
+                XMessaging.createPublisher(uuid + "." + eventEntity.topicName)
+        ));
     }
 
     private Map<String, String> createData(Map<String, Object> map){
@@ -104,19 +88,28 @@ public abstract class BaseMonitor implements Runnable {
     }
 
     protected void sendStreamData(String streamName, Map<String, Object> map){
-        this.pushData("stream", streamName, this.createData(map));
+        this.pushData("stream", streamName, this.createData(map), true);
     }
 
     protected void sendEventData(String eventName, Map<String, Object> map){
-        this.pushData("event", eventName, this.createData(map));
+        this.pushData("event", eventName, this.createData(map), true);
     }
 
     protected void pushStreamData(String streamName, Map<String, String> data){
-        this.pushData("stream", streamName, data);
+        this.pushData("stream", streamName, data, false);
     }
 
     protected void pushEventData(String eventName, Map<String, String> data){
-        this.pushData("event", eventName, data);
+        this.pushData("event", eventName, data, false);
+    }
+
+    private void pushData(String type,
+                          String name,
+                          Map<String, String> data,
+                          boolean pushToPipeline){
+        this.dataPushingExecutor.submit(()->{
+           this._pushData(type, name, data, pushToPipeline);
+        });
     }
 
     /**
@@ -126,32 +119,39 @@ public abstract class BaseMonitor implements Runnable {
      * @param name stream or event name
      * @param data a map container "key" and "value"
      */
-    private void pushData(String type, String name, Map<String, String> data){
+    private void _pushData(String type,
+                          String name,
+                          Map<String, String> data,
+                          boolean pushToPipeline){
         XMessagingPublisher publisher1;
         XMessagingPublisher publisher2;
 
         if(type.equals("stream")){
-            publisher1 = (XMessagingPublisher) streamMap.get(name).get(1);
-            publisher2 = (XMessagingPublisher) streamMap.get(name).get(2);
+            publisher1 = streamMap.get(name).first;
+            publisher2 = streamMap.get(name).second;
         }else if(type.equals("event")){
-            publisher1 = (XMessagingPublisher) eventMap.get(name).get(1);
-            publisher2 = (XMessagingPublisher) eventMap.get(name).get(2);
+            publisher1 = eventMap.get(name).first;
+            publisher2 = eventMap.get(name).second;
         }else{
             return;
         }
 
-        /* push the data to the pipeline */
-        JSONObject pipelineData = new JSONObject();
-        pipelineData.put("metric_type", type);
-        pipelineData.put("metric_key", data.get("key"));
-        pipelineData.put("metric_value", data.get("value"));
+        if(pushToPipeline){
+            /* push the data to the pipeline */
+            JSONObject pipelineData = new JSONObject();
+            pipelineData.put("metric_type", type);
+            pipelineData.put("metric_key", data.get("key"));
+            pipelineData.put("metric_value", data.get("value"));
 
-        this.getPipelineContainer().putMetricToPipe(
-                getMonitorName(), pipelineData
-        );
-
-        publisher1.send(data.get("value"));
-        publisher2.send(data.get("value"));
+            this.getPipelineContainer().putMetricToPipe(
+                    getMonitorName(), pipelineData
+            );
+            publisher1.send(data.get("value"));
+            publisher2.send(data.get("value"));
+        } else{
+            publisher1.send(JSON.toJSONString(data));
+            publisher2.send(JSON.toJSONString(data));
+        }
     }
 
     protected JSONObject getMetricFromPipe(String from){

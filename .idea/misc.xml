@@ -9,8 +9,14 @@
     </option>
     <option name="ignoredFiles">
       <set>
+        <option value="$PROJECT_DIR$/XDataFlowResourceMetric/pom.xml" />
+        <option value="$PROJECT_DIR$/XDataFlowTrace/pom.xml" />
         <option value="$PROJECT_DIR$/XFunnel/pom.xml" />
+        <option value="$PROJECT_DIR$/XHttpClient/pom.xml" />
+        <option value="$PROJECT_DIR$/XKubernetesAgent/pom.xml" />
         <option value="$PROJECT_DIR$/XRegistry/pom.xml" />
+        <option value="$PROJECT_DIR$/XServerTopologyBuilder/pom.xml" />
+        <option value="$PROJECT_DIR$/clients/XKubeServiceAutoscalerClient/pom.xml" />
       </set>
     </option>
   </component>

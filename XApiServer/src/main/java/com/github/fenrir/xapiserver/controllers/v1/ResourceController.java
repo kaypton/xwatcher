@@ -1,9 +1,9 @@
 package com.github.fenrir.xapiserver.controllers.v1;
 
 import com.github.fenrir.xapiserver.services.resources.v1.XLocalMonitorService;
-import com.github.fenrir.xcommon.clients.xapiserver.api.rest.responseEntities.api.v1.XLocalMonitorDeleteResponse;
-import com.github.fenrir.xcommon.clients.xapiserver.api.rest.responseEntities.api.v1.XLocalMonitorGetResponse;
-import com.github.fenrir.xcommon.clients.xapiserver.api.rest.responseEntities.api.v1.XLocalMonitorUpdateResponse;
+import com.github.fenrir.xapiserverclient.rest.responseEntities.api.v1.XLocalMonitorDeleteResponse;
+import com.github.fenrir.xapiserverclient.rest.responseEntities.api.v1.XLocalMonitorGetResponse;
+import com.github.fenrir.xapiserverclient.rest.responseEntities.api.v1.XLocalMonitorUpdateResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,7 +19,7 @@ public class ResourceController {
 
     @PutMapping(path = "/xlocalmonitor/update/{hostname}/{ipAddress}")
     public XLocalMonitorUpdateResponse updateXLocalMonitor(@PathVariable(name = "hostname") String hostname,
-                                              @PathVariable(name = "ipAddress") String ipAddress){
+                                                           @PathVariable(name = "ipAddress") String ipAddress){
         return xLocalMonitorService.update(hostname, ipAddress);
     }
 

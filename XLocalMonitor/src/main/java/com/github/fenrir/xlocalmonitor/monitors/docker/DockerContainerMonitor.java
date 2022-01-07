@@ -5,7 +5,7 @@ import com.github.fenrir.xlocalmonitor.annotations.Monitor;
 import com.github.fenrir.xlocalmonitor.entities.MessageBuilder;
 import com.github.fenrir.xlocalmonitor.inspectors.thirdpart.clients.dockerclient.DockerAPI;
 import com.github.fenrir.xlocalmonitor.monitors.BaseMonitor;
-import com.github.fenrir.xlocalmonitor.services.prometheus.*;
+import com.github.fenrir.prometheusdata.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -19,13 +19,13 @@ import java.util.concurrent.*;
         streams = {"docker.cpu.usage"},
         inspectors = {"docker"})
 public class DockerContainerMonitor extends BaseMonitor {
-    static private final Logger logger = LoggerFactory.getLogger("DockerContainerMonitor");
+    static private final Logger logger = LoggerFactory.getLogger(DockerContainerMonitor.class);
 
     static private final String DOCKER_CONTAINER_CPU_TOTAL_USAGE = "docker_container_cpu_total_usage";
     static private final String DOCKER_CONTAINER_MEMORY_USAGE = "docker_container_memory_usage";
     static private final String DOCKER_CONTAINER_NUM_PROCS = "docker_container_num_procs";
 
-    private final DockerAPI dockerAPI;
+    private DockerAPI dockerAPI;
     private Map<String, DockerAPI.DockerStatistics> lastMetric = new ConcurrentHashMap<>();
     private DataContainer dataContainer;
 
@@ -143,7 +143,6 @@ public class DockerContainerMonitor extends BaseMonitor {
     }
 
     public DockerContainerMonitor() {
-        this.dockerAPI = ((DockerAPI) this.getApiMap().get("docker"));
         this.statisticsBlockingQueueMap = new ConcurrentHashMap<>();
     }
 
@@ -154,6 +153,8 @@ public class DockerContainerMonitor extends BaseMonitor {
 
     @Override
     protected void doStart() {
+        logger.info("start ...");
+        this.dockerAPI = ((DockerAPI) this.getApiMap().get("docker"));
         this.registerTimerTask(new DockerContainerMonitorTimerTask(
                 this.dockerAPI,
                 this.statisticsBlockingQueueMap,
@@ -222,8 +223,8 @@ public class DockerContainerMonitor extends BaseMonitor {
     }
 
     public GetDataMethod getDataMethod(){
-        return (metricName, params) -> {
-            DockerAPI.DockerStatistics stats = this.getLastMetric(params[0]);
+        return (metricName, extensions) -> {
+            DockerAPI.DockerStatistics stats = this.getLastMetric(extensions[0]);
             switch (metricName) {
                 case DOCKER_CONTAINER_CPU_TOTAL_USAGE:
                     if(stats != null)
