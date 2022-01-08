@@ -2,6 +2,7 @@ package com.github.fenrir.xservicedependency.services;
 
 import com.github.fenrir.xservicedependency.processors.anomalyDetection.AnomalyDetectionProcessor;
 import com.github.fenrir.xservicedependency.processors.anomalyDetection.config.Configuration;
+import com.github.fenrir.xservicedependency.processors.anomalyDetection.config.TimeLimit;
 import com.github.fenrir.xservicedependency.processors.persistence.PersistenceProcessor;
 import com.github.fenrir.xservicedependency.entities.serviceDependency.Span;
 import com.github.fenrir.xservicedependency.entities.trace.OpenTelemetryTraceData;
@@ -10,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 @Service
 public class DependencyService {
@@ -47,6 +49,9 @@ public class DependencyService {
     }
 
     public Configuration getAnomalyDetectionProcessorTempConfiguration(){
-        return null;
+        Map<String, Map<String, TimeLimit>> responseTimeLimitsConfig = new ConcurrentHashMap<>();
+        Configuration config = new Configuration();
+        config.setResponseTimeLimits(responseTimeLimitsConfig);
+        return config;
     }
 }
