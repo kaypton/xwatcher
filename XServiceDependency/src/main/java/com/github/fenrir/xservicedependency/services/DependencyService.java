@@ -50,6 +50,13 @@ public class DependencyService {
 
     public Configuration getAnomalyDetectionProcessorTempConfiguration(){
         Map<String, Map<String, TimeLimit>> responseTimeLimitsConfig = new ConcurrentHashMap<>();
+
+        /* travel-plan-service responseTimeLimits */
+        Map<String, TimeLimit> travelPlanServiceInterfaceTimeLimits = new ConcurrentHashMap<>();
+
+        responseTimeLimitsConfig.put("travel-plan-service", travelPlanServiceInterfaceTimeLimits);
+        /* travel-plan-service responseTimeLimits end */
+
         Configuration config = new Configuration();
         config.setResponseTimeLimits(responseTimeLimitsConfig);
         return config;
