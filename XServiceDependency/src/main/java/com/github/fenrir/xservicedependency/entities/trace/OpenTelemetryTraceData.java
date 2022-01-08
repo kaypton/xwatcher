@@ -1,5 +1,7 @@
 package com.github.fenrir.xservicedependency.entities.trace;
 
+import com.alibaba.fastjson.annotation.JSONField;
+
 public class OpenTelemetryTraceData {
 
     public static class Event {
@@ -14,6 +16,7 @@ public class OpenTelemetryTraceData {
         public String kind;
         public String name;
         public Double startTimeUnixNano;
+        @JSONField(name = "parentSpanId")
         public String parentSpanId;
         public Event[] events;
     }

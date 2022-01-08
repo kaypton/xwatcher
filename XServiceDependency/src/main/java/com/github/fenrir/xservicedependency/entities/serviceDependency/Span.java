@@ -12,6 +12,7 @@ public class Span {
 
     private String traceId;
     private String spanId;
+    private String parentSpanId;
     private Double startTimeNano;
     private Double endTimeNano;
 
@@ -75,6 +76,14 @@ public class Span {
         this.endTimeNano = endTimeNano;
     }
 
+    public String getParentSpanId() {
+        return parentSpanId;
+    }
+
+    public void setParentSpanId(String parentSpanId) {
+        this.parentSpanId = parentSpanId;
+    }
+
     static public Span create(OpenTelemetryTraceData.Span data){
         Span span = new Span();
         String[] splitSpanName = data.name.split(":");
@@ -85,6 +94,7 @@ public class Span {
         span.setInterfaceName(interfaceName);
 
         span.setSpanId(data.spanId);
+        span.setParentSpanId(data.parentSpanId);
         span.setTraceId(data.traceId);
         span.setStartTimeNano(data.startTimeUnixNano);
         span.setEndTimeNano(data.endTimeUnixNano);
