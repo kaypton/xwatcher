@@ -19,7 +19,7 @@ public class PersistenceProcessor extends Processor {
     private Map<String, Service> serviceMap = new ConcurrentHashMap<>();
 
     @Override
-    protected Span internalDoFilter(Span span) {
+    protected Span internalDoProcess(Span span) {
         if(span == null) return null;
 
         processSpan(span);

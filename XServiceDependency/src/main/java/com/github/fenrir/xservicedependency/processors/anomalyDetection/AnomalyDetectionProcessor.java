@@ -11,7 +11,7 @@ public class AnomalyDetectionProcessor extends Processor {
     private Map<String, TraceGraph> traceGraphMap = new ConcurrentHashMap<>();
 
     @Override
-    protected Span internalDoFilter(Span span) {
+    protected Span internalDoProcess(Span span) {
         String traceId = span.getTraceId();
         if(this.traceGraphMap.containsKey(traceId)){
             this.traceGraphMap.get(traceId).addTraceNode(new TraceNode(span));

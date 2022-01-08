@@ -6,14 +6,14 @@ public abstract class Processor {
 
     private Processor nextFilter = null;
 
-    protected abstract Span internalDoFilter(Span span);
+    protected abstract Span internalDoProcess(Span span);
 
     public void setNextFilter(Processor filter) {
         this.nextFilter = filter;
     }
 
-    public void doFilter(Span span){
+    public void doProcess(Span span){
         if(this.nextFilter != null)
-            this.nextFilter.doFilter(this.internalDoFilter(span));
+            this.nextFilter.doProcess(this.internalDoProcess(span));
     }
 }

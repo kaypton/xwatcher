@@ -25,7 +25,7 @@ public class DependencyService {
         for(OpenTelemetryTraceData.ResourceSpan resourceSpan : traceData.resourceSpans){
             for(OpenTelemetryTraceData.InstrumentationLibrarySpan instrumentationLibrarySpan : resourceSpan.instrumentationLibrarySpans){
                 for(OpenTelemetryTraceData.Span span : instrumentationLibrarySpan.spans){
-                    this.persistenceFilter.doFilter(Span.create(span));
+                    this.persistenceFilter.doProcess(Span.create(span));
                 }
             }
         }
