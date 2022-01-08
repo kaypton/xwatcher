@@ -1,9 +1,9 @@
-package com.github.fenrir.xservicedependency.filters.persistence;
+package com.github.fenrir.xservicedependency.processors.persistence;
 
 import com.github.fenrir.xcommon.utils.Tuple2;
 import com.github.fenrir.xservicedependency.entities.serviceDependency.Event;
 import com.github.fenrir.xservicedependency.entities.serviceDependency.Span;
-import com.github.fenrir.xservicedependency.filters.Filter;
+import com.github.fenrir.xservicedependency.processors.Processor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,8 +13,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class PersistenceFilter extends Filter {
-    static private final Logger LOGGER = LoggerFactory.getLogger(PersistenceFilter.class);
+public class PersistenceProcessor extends Processor {
+    static private final Logger LOGGER = LoggerFactory.getLogger(PersistenceProcessor.class);
 
     private Map<String, Service> serviceMap = new ConcurrentHashMap<>();
 
@@ -79,12 +79,12 @@ public class PersistenceFilter extends Filter {
         return this.serviceMap.keySet();
     }
 
-    private Map<String, com.github.fenrir.xservicedependency.filters.persistence.Service> getServiceMap() {
+    private Map<String, com.github.fenrir.xservicedependency.processors.persistence.Service> getServiceMap() {
         return serviceMap;
     }
 
     public Set<String> getServiceInterfaceNames(String serviceName){
-        com.github.fenrir.xservicedependency.filters.persistence.Service srv = this.getServiceMap().getOrDefault(serviceName, null);
+        com.github.fenrir.xservicedependency.processors.persistence.Service srv = this.getServiceMap().getOrDefault(serviceName, null);
         if(srv != null){
             return srv.getInterfaceMap().keySet();
         }
@@ -92,7 +92,7 @@ public class PersistenceFilter extends Filter {
     }
 
     public Map<String, Set<String>> getDownstreamInterfaceNames(String serviceName, String interfaceName){
-        com.github.fenrir.xservicedependency.filters.persistence.Service srv = this.getServiceMap().getOrDefault(serviceName, null);
+        com.github.fenrir.xservicedependency.processors.persistence.Service srv = this.getServiceMap().getOrDefault(serviceName, null);
         if(srv != null){
             Interface i = srv.getInterface(interfaceName);
             if(i != null){

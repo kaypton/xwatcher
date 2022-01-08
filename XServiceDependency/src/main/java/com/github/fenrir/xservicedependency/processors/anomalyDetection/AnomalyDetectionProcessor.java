@@ -1,12 +1,12 @@
-package com.github.fenrir.xservicedependency.filters.anomalyDetection;
+package com.github.fenrir.xservicedependency.processors.anomalyDetection;
 
 import com.github.fenrir.xservicedependency.entities.serviceDependency.Span;
-import com.github.fenrir.xservicedependency.filters.Filter;
+import com.github.fenrir.xservicedependency.processors.Processor;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class AnomalyDetectionFilter extends Filter {
+public class AnomalyDetectionProcessor extends Processor {
 
     private Map<String, TraceGraph> traceGraphMap = new ConcurrentHashMap<>();
 

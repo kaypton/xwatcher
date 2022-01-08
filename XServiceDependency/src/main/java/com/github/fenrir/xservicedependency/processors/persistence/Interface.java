@@ -1,8 +1,6 @@
-package com.github.fenrir.xservicedependency.filters.persistence;
+package com.github.fenrir.xservicedependency.processors.persistence;
 
-import com.github.fenrir.prometheusclient.services.PrometheusDataPushService;
 import com.github.fenrir.xservicedependency.XServiceDependencyApplication;
-import com.github.fenrir.xservicedependency.configs.ApplicationConfig;
 import com.github.fenrir.xservicedependency.entities.influxDB.InterfaceRTNano;
 import com.github.fenrir.xservicedependency.entities.influxDB.InterfaceSTNano;
 import com.influxdb.client.InfluxDBClient;

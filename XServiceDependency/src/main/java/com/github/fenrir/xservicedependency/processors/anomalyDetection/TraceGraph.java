@@ -1,4 +1,4 @@
-package com.github.fenrir.xservicedependency.filters.anomalyDetection;
+package com.github.fenrir.xservicedependency.processors.anomalyDetection;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

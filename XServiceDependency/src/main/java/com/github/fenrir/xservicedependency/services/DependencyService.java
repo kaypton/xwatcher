@@ -1,7 +1,7 @@
 package com.github.fenrir.xservicedependency.services;
 
-import com.github.fenrir.xservicedependency.filters.anomalyDetection.AnomalyDetectionFilter;
-import com.github.fenrir.xservicedependency.filters.persistence.PersistenceFilter;
+import com.github.fenrir.xservicedependency.processors.anomalyDetection.AnomalyDetectionProcessor;
+import com.github.fenrir.xservicedependency.processors.persistence.PersistenceProcessor;
 import com.github.fenrir.xservicedependency.entities.serviceDependency.Span;
 import com.github.fenrir.xservicedependency.entities.trace.OpenTelemetryTraceData;
 import org.slf4j.Logger;
@@ -14,11 +14,11 @@ import java.util.*;
 public class DependencyService {
     private static final Logger LOGGER = LoggerFactory.getLogger(DependencyService.class);
 
-    private final PersistenceFilter persistenceFilter;
+    private final PersistenceProcessor persistenceFilter;
 
     public DependencyService(){
-        this.persistenceFilter = new PersistenceFilter();
-        this.persistenceFilter.setNextFilter(new AnomalyDetectionFilter());
+        this.persistenceFilter = new PersistenceProcessor();
+        this.persistenceFilter.setNextFilter(new AnomalyDetectionProcessor());
     }
 
     public void reportOtelTraceData(OpenTelemetryTraceData traceData){

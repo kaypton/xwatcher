@@ -1,4 +1,4 @@
-package com.github.fenrir.xservicedependency.filters.anomalyDetection;
+package com.github.fenrir.xservicedependency.processors.anomalyDetection;
 
 import com.github.fenrir.xservicedependency.entities.serviceDependency.Span;
 import org.slf4j.Logger;

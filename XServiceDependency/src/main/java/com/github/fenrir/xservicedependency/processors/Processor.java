@@ -1,14 +1,14 @@
-package com.github.fenrir.xservicedependency.filters;
+package com.github.fenrir.xservicedependency.processors;
 
 import com.github.fenrir.xservicedependency.entities.serviceDependency.Span;
 
-public abstract class Filter {
+public abstract class Processor {
 
-    private Filter nextFilter = null;
+    private Processor nextFilter = null;
 
     protected abstract Span internalDoFilter(Span span);
 
-    public void setNextFilter(Filter filter) {
+    public void setNextFilter(Processor filter) {
         this.nextFilter = filter;
     }
 
