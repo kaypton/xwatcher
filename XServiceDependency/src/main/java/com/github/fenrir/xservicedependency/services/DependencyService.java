@@ -1,6 +1,7 @@
 package com.github.fenrir.xservicedependency.services;
 
 import com.github.fenrir.xservicedependency.processors.anomalyDetection.AnomalyDetectionProcessor;
+import com.github.fenrir.xservicedependency.processors.anomalyDetection.config.Configuration;
 import com.github.fenrir.xservicedependency.processors.persistence.PersistenceProcessor;
 import com.github.fenrir.xservicedependency.entities.serviceDependency.Span;
 import com.github.fenrir.xservicedependency.entities.trace.OpenTelemetryTraceData;
@@ -18,7 +19,9 @@ public class DependencyService {
 
     public DependencyService(){
         this.persistenceFilter = new PersistenceProcessor();
-        this.persistenceFilter.setNextFilter(new AnomalyDetectionProcessor());
+        this.persistenceFilter.setNextFilter(new AnomalyDetectionProcessor(
+                this.getAnomalyDetectionProcessorTempConfiguration()
+        ));
     }
 
     public void reportOtelTraceData(OpenTelemetryTraceData traceData){
@@ -41,5 +44,9 @@ public class DependencyService {
 
     public Map<String, Set<String>> getDownstreamInterfaceNames(String serviceName, String interfaceName){
         return this.persistenceFilter.getDownstreamInterfaceNames(serviceName, interfaceName);
+    }
+
+    public Configuration getAnomalyDetectionProcessorTempConfiguration(){
+        return null;
     }
 }
