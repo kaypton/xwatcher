@@ -2,6 +2,8 @@ package com.github.fenrir.xservicedependency.processors.anomalyDetection;
 
 import com.github.fenrir.xservicedependency.entities.serviceDependency.Span;
 import com.github.fenrir.xservicedependency.processors.Processor;
+import com.github.fenrir.xservicedependency.processors.anomalyDetection.config.Configuration;
+import com.github.fenrir.xservicedependency.processors.anomalyDetection.config.TimeLimit;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -9,6 +11,12 @@ import java.util.concurrent.ConcurrentHashMap;
 public class AnomalyDetectionProcessor extends Processor {
 
     private Map<String, TraceGraph> traceGraphMap = new ConcurrentHashMap<>();
+
+    private final Map<String, Map<String, TimeLimit>> responseTimeLimits;
+
+    public AnomalyDetectionProcessor(Configuration config){
+        this.responseTimeLimits = config.getResponseTimeLimits();
+    }
 
     @Override
     protected Span internalDoProcess(Span span) {
