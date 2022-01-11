@@ -1,16 +1,15 @@
-package com.github.fenrir.xservicedependency.services;
+package com.github.fenrir.xtraceprocessor.services;
 
-import com.github.fenrir.xservicedependency.processors.Processor;
-import com.github.fenrir.xservicedependency.processors.traceBuilder.TraceBuilderProcessor;
-import com.github.fenrir.xservicedependency.processors.persistence.PersistenceProcessor;
-import com.github.fenrir.xservicedependency.entities.serviceDependency.Span;
-import com.github.fenrir.xservicedependency.entities.trace.OpenTelemetryTraceData;
+import com.github.fenrir.xtraceprocessor.processors.Processor;
+import com.github.fenrir.xtraceprocessor.processors.traceBuilder.TraceBuilderProcessor;
+import com.github.fenrir.xtraceprocessor.processors.persistence.PersistenceProcessor;
+import com.github.fenrir.xtraceprocessor.entities.serviceDependency.Span;
+import com.github.fenrir.xtraceprocessor.entities.trace.OpenTelemetryTraceData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;

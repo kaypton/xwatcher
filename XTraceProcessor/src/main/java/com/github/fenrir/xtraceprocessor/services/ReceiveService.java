@@ -1,13 +1,12 @@
-package com.github.fenrir.xservicedependency.services;
+package com.github.fenrir.xtraceprocessor.services;
 
 import com.alibaba.fastjson.JSON;
 import com.github.fenrir.xmessaging.MessageProcessCallBack;
 import com.github.fenrir.xmessaging.XMessage;
 import com.github.fenrir.xmessaging.XMessaging;
 import com.github.fenrir.xmessaging.XMessagingListener;
-import com.github.fenrir.xservicedependency.XServiceDependencyApplication;
-import com.github.fenrir.xservicedependency.entities.serviceDependency.Span;
-import com.github.fenrir.xservicedependency.entities.trace.OpenTelemetryTraceData;
+import com.github.fenrir.xtraceprocessor.XTraceProcessorApplication;
+import com.github.fenrir.xtraceprocessor.entities.trace.OpenTelemetryTraceData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,7 +58,7 @@ public class ReceiveService {
 
     public void startup(){
         LOGGER.info("receiver startup ...");
-        XMessaging xMessaging = XServiceDependencyApplication.context.getBean("xmessaging", XMessaging.class);
+        XMessaging xMessaging = XTraceProcessorApplication.context.getBean("xmessaging", XMessaging.class);
         this.listenerExecutor.submit(()->{
             XMessagingListener listener = xMessaging.getListener(natsTopic, new TraceDataProcessor(this.dependencyService));
             listener.block();
