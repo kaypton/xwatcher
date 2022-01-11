@@ -1,6 +1,6 @@
-package com.github.fenrir.xservicedependency.processors;
+package com.github.fenrir.xtraceprocessor.processors;
 
-import com.github.fenrir.xservicedependency.entities.serviceDependency.Span;
+import com.github.fenrir.xtraceprocessor.entities.serviceDependency.Span;
 
 public abstract class Processor {
 
