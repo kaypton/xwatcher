@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+import "hostinfo/hostinfo.proto";
+
+message CpuUsage {
+  double usage = 1;
+}
+
+message CpuUsageMsg {
+  hostinfo.HostInfo host_info = 1;
+  CpuUsage system_cpu_usage = 2;
+  CpuUsage user_cpu_usage = 3;
+  CpuUsage total_cpu_usage = 4;
+}
+
+message DockerCpuUsageMsg {
+
+}
+
+
+
+
+

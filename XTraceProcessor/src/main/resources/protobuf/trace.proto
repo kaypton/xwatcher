@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+message SubCall {
+  string subcall_uuid = 1;
+  double start_time_unix_nano = 2;
+  double end_time_unix_nano = 3;
+  string service_name = 4;
+  string interface_name = 5;
+  string interface_uri = 6;
+}
+
+message Span {
+  string trace_id = 1;
+  string span_id = 2;
+  string parent_span_id = 3;
+  string instance_uuid = 4;
+  double start_time_unix_nano = 5;
+  double end_time_unix_nano = 6;
+  string service_name = 7;
+  string interface_name = 8;
+  string interface_uri = 9;
+  string kind = 10;
+  optional string subcall_uuid = 11;
+
+  repeated SubCall subcalls = 16;
+}
+
+message TraceGraph {
+  optional TraceNode root = 1;
+  repeated TraceNode orphans = 2;
+}
+
+message TraceNode {
+  Span span = 1;
+  repeated TraceNode children = 2;
+}
