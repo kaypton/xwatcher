@@ -1,8 +1,8 @@
-package com.github.fenrir.xservicedependency.processors.persistence;
+package com.github.fenrir.xtraceprocessor.processors.persistence;
 
-import com.github.fenrir.xservicedependency.XServiceDependencyApplication;
-import com.github.fenrir.xservicedependency.entities.influxDB.InterfaceRTNano;
-import com.github.fenrir.xservicedependency.entities.influxDB.InterfaceSTNano;
+import com.github.fenrir.xtraceprocessor.XTraceProcessorApplication;
+import com.github.fenrir.xtraceprocessor.entities.influxDB.InterfaceRTNano;
+import com.github.fenrir.xtraceprocessor.entities.influxDB.InterfaceSTNano;
 import com.influxdb.client.InfluxDBClient;
 import com.influxdb.client.domain.WritePrecision;
 // import org.slf4j.Logger;
@@ -31,7 +31,7 @@ public class Interface {
     private InfluxDBClient influxDBClient;
 
     public Interface(){
-        this.influxDBClient = XServiceDependencyApplication.context.getBean("influxDBClient", InfluxDBClient.class);
+        this.influxDBClient = XTraceProcessorApplication.context.getBean("influxDBClient", InfluxDBClient.class);
     }
 
     public String getName() {

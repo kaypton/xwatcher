@@ -1,9 +1,9 @@
-package com.github.fenrir.xservicedependency.processors.persistence;
+package com.github.fenrir.xtraceprocessor.processors.persistence;
 
 import com.github.fenrir.xcommon.utils.Tuple2;
-import com.github.fenrir.xservicedependency.entities.serviceDependency.SubCall;
-import com.github.fenrir.xservicedependency.entities.serviceDependency.Span;
-import com.github.fenrir.xservicedependency.processors.Processor;
+import com.github.fenrir.xtraceprocessor.entities.serviceDependency.SubCall;
+import com.github.fenrir.xtraceprocessor.entities.serviceDependency.Span;
+import com.github.fenrir.xtraceprocessor.processors.Processor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -79,12 +79,12 @@ public class PersistenceProcessor extends Processor {
         return this.serviceMap.keySet();
     }
 
-    private Map<String, com.github.fenrir.xservicedependency.processors.persistence.Service> getServiceMap() {
+    private Map<String, com.github.fenrir.xtraceprocessor.processors.persistence.Service> getServiceMap() {
         return serviceMap;
     }
 
     public Set<String> getServiceInterfaceNames(String serviceName){
-        com.github.fenrir.xservicedependency.processors.persistence.Service srv = this.getServiceMap().getOrDefault(serviceName, null);
+        com.github.fenrir.xtraceprocessor.processors.persistence.Service srv = this.getServiceMap().getOrDefault(serviceName, null);
         if(srv != null){
             return srv.getInterfaceMap().keySet();
         }
@@ -92,7 +92,7 @@ public class PersistenceProcessor extends Processor {
     }
 
     public Map<String, Set<String>> getDownstreamInterfaceNames(String serviceName, String interfaceName){
-        com.github.fenrir.xservicedependency.processors.persistence.Service srv = this.getServiceMap().getOrDefault(serviceName, null);
+        com.github.fenrir.xtraceprocessor.processors.persistence.Service srv = this.getServiceMap().getOrDefault(serviceName, null);
         if(srv != null){
             Interface i = srv.getInterface(interfaceName);
             if(i != null){

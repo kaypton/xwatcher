@@ -1,4 +1,4 @@
-package com.github.fenrir.xservicedependency.processors.persistence;
+package com.github.fenrir.xtraceprocessor.processors.persistence;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
