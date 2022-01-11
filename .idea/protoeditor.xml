@@ -169,6 +169,9 @@
         <ImportPathEntry>
           <option name="location" value="file://$PROJECT_DIR$/XLocalMonitor/src/messages/protobuf" />
         </ImportPathEntry>
+        <ImportPathEntry>
+          <option name="location" value="file://$PROJECT_DIR$/protobuf" />
+        </ImportPathEntry>
       </list>
     </option>
     <option name="descriptorPath" value="google/protobuf/descriptor.proto" />

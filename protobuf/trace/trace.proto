@@ -1,5 +1,7 @@
 syntax = "proto3";
 
+package trace;
+
 message SubCall {
   string subcall_uuid = 1;
   double start_time_unix_nano = 2;

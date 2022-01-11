@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-import "hostinfo/hostinfo.proto";
+import "xlocalmonitor/hostinfo/hostinfo.proto";
 
 package cpu_event;
 
