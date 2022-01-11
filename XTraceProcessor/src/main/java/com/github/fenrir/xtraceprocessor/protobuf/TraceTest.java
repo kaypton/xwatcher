@@ -1,4 +1,4 @@
-package com.github.fenrir.xservicedependency.protobuf;
+package com.github.fenrir.xtraceprocessor.protobuf;
 
 public class TraceTest {
     public static void main(String[] args){

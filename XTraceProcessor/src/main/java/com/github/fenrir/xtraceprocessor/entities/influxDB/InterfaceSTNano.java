@@ -1,4 +1,4 @@
-package com.github.fenrir.xservicedependency.entities.influxDB;
+package com.github.fenrir.xtraceprocessor.entities.influxDB;
 
 import com.influxdb.annotations.Column;
 import com.influxdb.annotations.Measurement;

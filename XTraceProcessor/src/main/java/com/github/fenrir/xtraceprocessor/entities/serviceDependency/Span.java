@@ -1,8 +1,8 @@
-package com.github.fenrir.xservicedependency.entities.serviceDependency;
+package com.github.fenrir.xtraceprocessor.entities.serviceDependency;
 
 import com.github.fenrir.xcommon.utils.Tuple2;
-import com.github.fenrir.xservicedependency.entities.trace.OpenTelemetryTraceData;
-import com.github.fenrir.xservicedependency.protobuf.Trace;
+import com.github.fenrir.xtraceprocessor.entities.trace.OpenTelemetryTraceData;
+import com.github.fenrir.xtraceprocessor.protobuf.Trace;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

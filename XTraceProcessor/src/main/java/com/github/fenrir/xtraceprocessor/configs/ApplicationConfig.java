@@ -1,8 +1,8 @@
-package com.github.fenrir.xservicedependency.configs;
+package com.github.fenrir.xtraceprocessor.configs;
 
 import com.github.fenrir.xmessaging.XMessaging;
 import com.github.fenrir.xmessaging.XMessagingConfiguration;
-import com.github.fenrir.xservicedependency.services.ReceiveService;
+import com.github.fenrir.xtraceprocessor.services.ReceiveService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;

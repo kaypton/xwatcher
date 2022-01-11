@@ -1,6 +1,4 @@
-package com.github.fenrir.xservicedependency.entities.trace;
-
-import com.alibaba.fastjson.annotation.JSONField;
+package com.github.fenrir.xtraceprocessor.entities.trace;
 
 public class OpenTelemetryTraceData {
 

@@ -1,6 +1,6 @@
-package com.github.fenrir.xservicedependency.entities.serviceDependency;
+package com.github.fenrir.xtraceprocessor.entities.serviceDependency;
 
-import com.github.fenrir.xservicedependency.protobuf.Trace;
+import com.github.fenrir.xtraceprocessor.protobuf.Trace;
 
 public class SubCall {
     private String serviceName;

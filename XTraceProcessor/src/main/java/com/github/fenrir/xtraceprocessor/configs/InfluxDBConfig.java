@@ -1,4 +1,4 @@
-package com.github.fenrir.xservicedependency.configs;
+package com.github.fenrir.xtraceprocessor.configs;
 
 import com.influxdb.client.InfluxDBClient;
 import com.influxdb.client.InfluxDBClientFactory;

@@ -1,7 +1,6 @@
-package com.github.fenrir.xservicedependency;
+package com.github.fenrir.xtraceprocessor;
 
-import com.github.fenrir.prometheusclient.services.PrometheusDataPushService;
-import com.github.fenrir.xservicedependency.services.ReceiveService;
+import com.github.fenrir.xtraceprocessor.services.ReceiveService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration;
@@ -18,11 +17,11 @@ import org.springframework.context.ConfigurableApplicationContext;
                 "com.github.fenrir.prometheusclient"
         }
 )
-public class XServiceDependencyApplication {
+public class XTraceProcessorApplication {
     static public ConfigurableApplicationContext context;
 
     static public void main(String[] args){
-        context = SpringApplication.run(XServiceDependencyApplication.class);
+        context = SpringApplication.run(XTraceProcessorApplication.class);
         context.getBean(ReceiveService.class).startup();
     }
 }
