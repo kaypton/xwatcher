@@ -1,4 +1,4 @@
-package com.github.fenrir.xtraceprocessor.processors.traceBuilder;
+package com.github.fenrir.xtraceprocessor.processors.tracebuilder;
 
 import com.github.fenrir.xtraceprocessor.entities.serviceDependency.Span;
 import com.github.fenrir.xtraceprocessor.protobuf.Trace;

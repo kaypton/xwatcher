@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package hostinfo;
+
+message CpuInfo {
+  int32 core_num = 1;
+  int32 socket_num = 2;
+}
+
+message MemoryInfo {
+
+}
+
+message HostInfo {
+  string hostname = 1;
+  string rpc_subject = 2;
+  string monitor_id = 3;
+  CpuInfo cpu_info = 4;
+}
+
+

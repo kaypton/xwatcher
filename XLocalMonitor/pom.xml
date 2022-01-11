@@ -104,6 +104,12 @@
         </dependency>
 
         <dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-java</artifactId>
+            <version>3.19.2</version>
+        </dependency>
+
+        <dependency>
             <groupId>com.github.fenrir</groupId>
             <artifactId>XMessaging</artifactId>
             <exclusions>

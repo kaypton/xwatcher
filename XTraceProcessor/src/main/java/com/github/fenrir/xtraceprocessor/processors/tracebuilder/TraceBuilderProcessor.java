@@ -1,4 +1,4 @@
-package com.github.fenrir.xtraceprocessor.processors.traceBuilder;
+package com.github.fenrir.xtraceprocessor.processors.tracebuilder;
 
 import com.github.fenrir.xmessaging.XMessageBuilder;
 import com.github.fenrir.xmessaging.XMessaging;
@@ -44,7 +44,7 @@ public class TraceBuilderProcessor extends Processor {
     protected Span internalDoProcess(Span span) {
         if(this.xMessagingPublisher == null){
             XMessaging xMessaging = XTraceProcessorApplication.context.getBean("xmessaging", XMessaging.class);
-            this.xMessagingPublisher = xMessaging.getPublisher("trace.graph");
+            this.xMessagingPublisher = xMessaging.getPublisher("trace.graph.protobuf");
         }
 
         synchronized (this.traceGraphMap) {
@@ -78,11 +78,10 @@ public class TraceBuilderProcessor extends Processor {
         if(traceGraph != null){
             if(traceGraph.checkIntegrityOrTimeout(Duration.ofSeconds(20))){
                 ByteArrayOutputStream bos = new ByteArrayOutputStream();
-
                 Trace.TraceGraph graph = traceGraph.getProtobuf();
                 try {
                     graph.writeTo(bos);
-                    this.xMessagingPublisher.send(XMessageBuilder.builder("trace.graph")
+                    this.xMessagingPublisher.send(XMessageBuilder.builder("trace.graph.protobuf")
                             .setPayload(bos.toByteArray())
                             .buildNatsMessage());
                 } catch (IOException e) {

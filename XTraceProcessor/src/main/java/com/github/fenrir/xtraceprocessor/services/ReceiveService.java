@@ -23,17 +23,17 @@ public class ReceiveService {
 
     static public String natsTopic = null;
 
-    private final DependencyService dependencyService;
+    private final ProcessorService processorService;
 
     private final ThreadPoolExecutor listenerExecutor =
             new ThreadPoolExecutor(1, 1, 0, TimeUnit.SECONDS, new LinkedBlockingDeque<>());
 
     private static class TraceDataProcessor implements MessageProcessCallBack {
 
-        private final DependencyService dependencyService;
+        private final ProcessorService processorService;
 
-        public TraceDataProcessor(DependencyService dependencyService){
-            this.dependencyService = dependencyService;
+        public TraceDataProcessor(ProcessorService processorService){
+            this.processorService = processorService;
         }
 
         private final ThreadPoolExecutor executor = new ThreadPoolExecutor(
@@ -46,21 +46,21 @@ public class ReceiveService {
                 String traceStr = msg.getStringData();
                 if(traceStr != null){
                     OpenTelemetryTraceData traceData = JSON.parseObject(traceStr, OpenTelemetryTraceData.class);
-                    dependencyService.reportOtelTraceData(traceData);
+                    processorService.reportOtelTraceData(traceData);
                 }
             });
         }
     }
 
-    public ReceiveService(@Autowired DependencyService dependencyService){
-        this.dependencyService = dependencyService;
+    public ReceiveService(@Autowired ProcessorService processorService){
+        this.processorService = processorService;
     }
 
     public void startup(){
         LOGGER.info("receiver startup ...");
         XMessaging xMessaging = XTraceProcessorApplication.context.getBean("xmessaging", XMessaging.class);
         this.listenerExecutor.submit(()->{
-            XMessagingListener listener = xMessaging.getListener(natsTopic, new TraceDataProcessor(this.dependencyService));
+            XMessagingListener listener = xMessaging.getListener(natsTopic, new TraceDataProcessor(this.processorService));
             listener.block();
         });
     }

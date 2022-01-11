@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+import "hostinfo/hostinfo.proto";
+
+package cpu_event;
+
+message NodeCpuOverLoadEvent {
+  hostinfo.HostInfo host_info = 1;
+}
+
+message NodeCpuUnderLoadEvent {
+  hostinfo.HostInfo host_info = 1;
+}
+
+
+
+
+

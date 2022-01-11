@@ -9,9 +9,9 @@
         <outputRelativeToContentRoot value="true" />
         <module name="InfluxDBClient" />
         <module name="PrometheusData" />
+        <module name="XTraceAnomalyDetector" />
         <module name="XDataFlowResourceMetric" />
         <module name="XDashboard" />
-        <module name="XServiceDependency" />
         <module name="XLocalMonitor" />
         <module name="XHttpClient" />
         <module name="XCommon" />
@@ -19,6 +19,7 @@
         <module name="XOpenStackAgent" />
         <module name="PrometheusClient" />
         <module name="XMessaging" />
+        <module name="XTraceProcessor" />
         <module name="XPlanner" />
         <module name="XApiServerClient" />
         <module name="XSniffer" />

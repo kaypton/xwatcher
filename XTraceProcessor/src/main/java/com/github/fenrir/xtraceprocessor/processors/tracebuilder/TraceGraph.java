@@ -1,4 +1,4 @@
-package com.github.fenrir.xtraceprocessor.processors.traceBuilder;
+package com.github.fenrir.xtraceprocessor.processors.tracebuilder;
 
 import com.github.fenrir.xtraceprocessor.protobuf.Trace;
 import org.slf4j.Logger;

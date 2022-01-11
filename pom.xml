@@ -21,12 +21,13 @@
         <module>flink/XDataFlowResourceMetric</module>
         <module>XDeepStrategy</module>
         <module>XApiServer</module>
-        <module>XServiceDependency</module>
+        <module>XTraceProcessor</module>
         <module>clients/XApiServerClient</module>
         <module>clients/PrometheusClient</module>
         <module>components/PrometheusData</module>
         <module>clients/XHttpClient</module>
         <module>clients/InfluxDBClient</module>
+        <module>XTraceAnomalyDetector</module>
     </modules>
 
     <properties>

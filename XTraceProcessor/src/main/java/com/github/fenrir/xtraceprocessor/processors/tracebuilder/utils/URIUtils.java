@@ -1,4 +1,4 @@
-package com.github.fenrir.xtraceprocessor.processors.traceBuilder.utils;
+package com.github.fenrir.xtraceprocessor.processors.tracebuilder.utils;
 
 public class URIUtils {
     static public boolean match(String uri, String target){

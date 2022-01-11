@@ -1,7 +1,7 @@
 package com.github.fenrir.xtraceprocessor.services;
 
 import com.github.fenrir.xtraceprocessor.processors.Processor;
-import com.github.fenrir.xtraceprocessor.processors.traceBuilder.TraceBuilderProcessor;
+import com.github.fenrir.xtraceprocessor.processors.tracebuilder.TraceBuilderProcessor;
 import com.github.fenrir.xtraceprocessor.processors.persistence.PersistenceProcessor;
 import com.github.fenrir.xtraceprocessor.entities.serviceDependency.Span;
 import com.github.fenrir.xtraceprocessor.entities.trace.OpenTelemetryTraceData;
@@ -15,13 +15,13 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 @Service
-public class DependencyService {
-    private static final Logger LOGGER = LoggerFactory.getLogger(DependencyService.class);
+public class ProcessorService {
+    private static final Logger LOGGER = LoggerFactory.getLogger(ProcessorService.class);
 
     private final PersistenceProcessor persistenceFilter;
     private final Processor rootFilter;
 
-    public DependencyService(){
+    public ProcessorService(){
         this.persistenceFilter = new PersistenceProcessor();
         this.rootFilter = new TraceBuilderProcessor();
     }

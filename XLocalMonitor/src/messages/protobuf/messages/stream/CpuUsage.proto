@@ -2,19 +2,26 @@ syntax = "proto3";
 
 import "hostinfo/hostinfo.proto";
 
+package cpu_usage_msg;
+
 message CpuUsage {
   double usage = 1;
 }
 
-message CpuUsageMsg {
+message NodeCpuUsageMsg {
   hostinfo.HostInfo host_info = 1;
   CpuUsage system_cpu_usage = 2;
   CpuUsage user_cpu_usage = 3;
   CpuUsage total_cpu_usage = 4;
 }
 
-message DockerCpuUsageMsg {
-
+message DockerContainerCpuUsageMsg {
+  hostinfo.HostInfo host_info = 1;
+  string container_id = 2;
+  string container_name = 3;
+  CpuUsage system_cpu_usage = 4;
+  CpuUsage user_cpu_usage = 5;
+  CpuUsage total_cpu_usage = 6;
 }
 
 
