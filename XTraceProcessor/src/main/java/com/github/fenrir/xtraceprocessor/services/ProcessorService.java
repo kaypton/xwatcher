@@ -3,7 +3,7 @@ package com.github.fenrir.xtraceprocessor.services;
 import com.github.fenrir.xtraceprocessor.processors.Processor;
 import com.github.fenrir.xtraceprocessor.processors.tracebuilder.TraceBuilderProcessor;
 import com.github.fenrir.xtraceprocessor.processors.persistence.PersistenceProcessor;
-import com.github.fenrir.xtraceprocessor.entities.serviceDependency.Span;
+import com.github.fenrir.xtraceprocessor.entities.trace.Span;
 import com.github.fenrir.xtraceprocessor.entities.trace.OpenTelemetryTraceData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,6 +30,8 @@ public class ProcessorService {
             10, 10000, 60, TimeUnit.SECONDS, new LinkedBlockingQueue<>()
     );
 
+    private int num = 0;
+
     public void reportOtelTraceData(OpenTelemetryTraceData traceData){
         if(traceData == null) return;
         for(OpenTelemetryTraceData.ResourceSpan resourceSpan : traceData.resourceSpans){
@@ -38,7 +40,7 @@ public class ProcessorService {
                     Span _span = Span.create(resourceSpan.resource, instrumentationLibrarySpan.spans[i]);
                     filterProcessorExecutor.submit(() -> {
                         this.persistenceFilter.doProcess(_span);
-                        this.rootFilter.doProcess(_span);
+                        // this.rootFilter.doProcess(_span);
                     });
                 }
             }

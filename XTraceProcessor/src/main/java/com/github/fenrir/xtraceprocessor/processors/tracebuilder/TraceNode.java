@@ -1,6 +1,6 @@
 package com.github.fenrir.xtraceprocessor.processors.tracebuilder;
 
-import com.github.fenrir.xtraceprocessor.entities.serviceDependency.Span;
+import com.github.fenrir.xtraceprocessor.entities.trace.Span;
 import com.github.fenrir.xtraceprocessor.protobuf.Trace;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

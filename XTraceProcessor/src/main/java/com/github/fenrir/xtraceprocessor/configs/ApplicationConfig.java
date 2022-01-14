@@ -2,7 +2,7 @@ package com.github.fenrir.xtraceprocessor.configs;
 
 import com.github.fenrir.xmessaging.XMessaging;
 import com.github.fenrir.xmessaging.XMessagingConfiguration;
-import com.github.fenrir.xtraceprocessor.services.ReceiveService;
+import com.github.fenrir.xtraceprocessor.services.CollectorService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,7 +22,7 @@ public class ApplicationConfig {
                              @Value("${XServiceDependency.prometheusJobName}") String _prometheusJobName){
         prometheusJobName = _prometheusJobName;
         if(!traceDataNatsTopic.equals("none")) {
-            ReceiveService.natsTopic = traceDataNatsTopic;
+            CollectorService.natsTopic = traceDataNatsTopic;
             LOGGER.info("trace data nats topic:{}", traceDataNatsTopic);
         }
 

@@ -4,7 +4,7 @@ import com.github.fenrir.xmessaging.XMessageBuilder;
 import com.github.fenrir.xmessaging.XMessaging;
 import com.github.fenrir.xmessaging.XMessagingPublisher;
 import com.github.fenrir.xtraceprocessor.XTraceProcessorApplication;
-import com.github.fenrir.xtraceprocessor.entities.serviceDependency.Span;
+import com.github.fenrir.xtraceprocessor.entities.trace.Span;
 import com.github.fenrir.xtraceprocessor.processors.Processor;
 import com.github.fenrir.xtraceprocessor.protobuf.Trace;
 import org.slf4j.Logger;

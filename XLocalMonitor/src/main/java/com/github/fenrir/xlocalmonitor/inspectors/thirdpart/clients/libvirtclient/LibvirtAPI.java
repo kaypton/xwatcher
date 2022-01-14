@@ -12,16 +12,31 @@ import java.util.List;
 
 @Inspector(name = "libvirt")
 public class LibvirtAPI {
-    private static final Logger logger = LoggerFactory.getLogger("LibvirtAPI");
-    @Getter @Setter private Connect connect = null;
-    @Setter @Getter private static String libvirtConnectionURL = null;
+    private static final Logger LOGGER = LoggerFactory.getLogger("LibvirtAPI");
 
-    public LibvirtAPI(){
+    private Connect connect = null;
+    private static String libvirtConnectionURL = null;
 
+    public LibvirtAPI(){}
+
+    public Connect getConnect() {
+        return connect;
+    }
+
+    public void setConnect(Connect connect) {
+        this.connect = connect;
+    }
+
+    public static String getLibvirtConnectionURL() {
+        return libvirtConnectionURL;
+    }
+
+    public static void setLibvirtConnectionURL(String libvirtConnectionURL) {
+        LibvirtAPI.libvirtConnectionURL = libvirtConnectionURL;
     }
 
     public void connect(){
-        logger.info("LibvirtAPI prepare to connect to libvirt");
+        LOGGER.info("LibvirtAPI prepare to connect to libvirt");
 
         try {
             this.setConnect(new Connect(getLibvirtConnectionURL(), true));
@@ -30,9 +45,9 @@ public class LibvirtAPI {
         }
 
         try {
-            logger.info("connect to host : " + getConnect().getHostName());
-            logger.info("libvirt version : " + getConnect().getLibVersion());
-            logger.info("connected URL   : " + getConnect().getURI());
+            LOGGER.info("connect to host : " + getConnect().getHostName());
+            LOGGER.info("libvirt version : " + getConnect().getLibVersion());
+            LOGGER.info("connected URL   : " + getConnect().getURI());
         } catch (LibvirtException e) {
             e.printStackTrace();
         }
@@ -123,5 +138,4 @@ public class LibvirtAPI {
     private Domain _getDomainById(int domainId) throws LibvirtException {
         return getConnect().domainLookupByID(domainId);
     }
-
 }

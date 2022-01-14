@@ -1,28 +1,18 @@
 package com.github.fenrir.xdataflowtrace;
 
-import com.alibaba.fastjson.JSONObject;
-import org.apache.flink.api.common.eventtime.SerializableTimestampAssigner;
-import org.apache.flink.api.common.eventtime.WatermarkStrategy;
-import org.apache.flink.api.common.functions.FlatMapFunction;
-import org.apache.flink.api.java.functions.KeySelector;
-import org.apache.flink.api.java.tuple.Tuple2;
+import com.github.fenrir.xdataflowtrace.configs.URISelectorConfig;
+import com.github.fenrir.xdataflowtrace.entity.trace.Span;
+import com.github.fenrir.xdataflowtrace.functions.SpanFlatMapFunction;
+import com.github.fenrir.xdataflowtrace.functions.SpanKeySelector;
 import org.apache.flink.api.java.utils.ParameterTool;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.datastream.DataStreamSource;
 import org.apache.flink.streaming.api.datastream.KeyedStream;
-import org.apache.flink.streaming.api.datastream.SingleOutputStreamOperator;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
-import org.apache.flink.streaming.api.functions.windowing.WindowFunction;
-import org.apache.flink.streaming.api.windowing.assigners.SlidingEventTimeWindows;
-import org.apache.flink.streaming.api.windowing.time.Time;
-import org.apache.flink.streaming.api.windowing.windows.TimeWindow;
-import org.apache.flink.util.Collector;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.github.fenrir.xdataflowtrace.entity.InterfaceWithCount;
-
-import java.time.Duration;
+import com.github.fenrir.xdataflowtrace.entity.SpanWithCount;
 
 public class XDataFlowTraceApplication {
 
@@ -31,11 +21,11 @@ public class XDataFlowTraceApplication {
     static public void main(String[] args){
         ParameterTool parameterTool = ParameterTool.fromArgs(args);
 
-        int sourceParallelism = parameterTool.getInt("sourceParallelism", 1);
+        int sourceParallelism = parameterTool.getInt("sourceParallelism", 4);
         int mapParallelism = parameterTool.getInt("mapParallelism", 1);
-        String natsServerAddresses = parameterTool.get("natsServerAddresses", "");
-        String natsSubject = parameterTool.get("natsSubject", "");
-        long watermarkIdlenessSec = parameterTool.getLong("watermarkIdlenessSec", -1);
+        String natsServerAddresses = parameterTool.get("natsServerAddresses", "nats://222.201.144.237:4222,nats://222.201.144.237:4223,nats://222.201.144.237:4224");
+        String natsSubject = parameterTool.get("natsSubject", "stream.trainticket.trace");
+        long watermarkIdlenessSec = parameterTool.getLong("watermarkIdlenessSec", 1);
 
         if(natsSubject.equals("") || natsServerAddresses.equals("")){
             LOGGER.error("nats subject or nats server address has not been set");
@@ -50,10 +40,10 @@ public class XDataFlowTraceApplication {
 
         final StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
 
-        DataStreamSource<String> source =
-                env.addSource(new NatsParallelSourceFunction(natsServerAddresses,
+        DataStreamSource<Span> source = env.addSource(new NatsParallelSourceFunction(natsServerAddresses,
                         natsSubject), "Nats Source").setParallelism(sourceParallelism);
-        WatermarkStrategy<String> watermarkStrategy = WatermarkStrategy
+
+        /*WatermarkStrategy<String> watermarkStrategy = WatermarkStrategy
                 .<String>forBoundedOutOfOrderness(Duration.ofSeconds(1))
                 .withTimestampAssigner(new SerializableTimestampAssigner<String>() {
                     @Override
@@ -65,32 +55,21 @@ public class XDataFlowTraceApplication {
                                 .getLongValue("startTimeUnixNano") / 1000000;
                     }
                 })
-                .withIdleness(Duration.ofSeconds(watermarkIdlenessSec));
+                .withIdleness(Duration.ofSeconds(watermarkIdlenessSec));*/
 
-        DataStream<InterfaceWithCount> mapStream = source
-                .assignTimestampsAndWatermarks(watermarkStrategy)
-                .flatMap(new FlatMapFunction<String, InterfaceWithCount>() {
-                    @Override
-                    public void flatMap(String value, Collector<InterfaceWithCount> out) {
-                        JSONObject uri = JSONObject.parseObject(value);
-                        String interfaceName = uri
-                                .getJSONArray("resourceSpans").getJSONObject(0)
-                                .getJSONArray("instrumentationLibrarySpans").getJSONObject(0)
-                                .getJSONArray("spans").getJSONObject(0)
-                                .getString("name");
+        DataStream<SpanWithCount> mapStream = source
+                //.assignTimestampsAndWatermarks(watermarkStrategy)
+                .flatMap(new SpanFlatMapFunction(URISelectorConfig.tmpCreate()))
+                .setParallelism(mapParallelism);
 
-                        out.collect(new InterfaceWithCount(interfaceName));
-                    }
-                }).setParallelism(mapParallelism);
+        KeyedStream<SpanWithCount, String> keyedByServiceNameStream = mapStream
+                .keyBy(new SpanKeySelector(SpanKeySelector.Key.SERVICE_NAME));
+        KeyedStream<SpanWithCount, String> keyedByInterfaceURIStream = keyedByServiceNameStream
+                .keyBy(new SpanKeySelector(SpanKeySelector.Key.INTERFACE_URI));
 
-        KeyedStream<InterfaceWithCount, String> keyByStream = mapStream.keyBy(new KeySelector<InterfaceWithCount, String>() {
-            @Override
-            public String getKey(InterfaceWithCount value) {
-                return value.interfaceName;
-            }
-        });
+        keyedByInterfaceURIStream.print();
 
-        SingleOutputStreamOperator<InterfaceWithCount> sumStream = keyByStream
+        /*SingleOutputStreamOperator<InterfaceWithCount> sumStream = keyByStream
                 .window(SlidingEventTimeWindows.of(Time.seconds(5), Time.seconds(1)))
                 .apply(new WindowFunction<InterfaceWithCount, InterfaceWithCount, String, TimeWindow>() {
                     @Override
@@ -106,7 +85,7 @@ public class XDataFlowTraceApplication {
                         out.collect(interfaceWithCount);
                     }
                 });
-        sumStream.print().setParallelism(4);
+        sumStream.print().setParallelism(4);*/
 
         try {
             env.execute("TraceDataFlow");

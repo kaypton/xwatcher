@@ -1,5 +1,0 @@
-server:
-  port: 12345
-
-deep:
-  MLPConfig: ${MLP_CONFIG:/etc/xdeepstrategy/configs/mlp.yaml}

@@ -1,6 +1,6 @@
 package com.github.fenrir.xtraceprocessor;
 
-import com.github.fenrir.xtraceprocessor.services.ReceiveService;
+import com.github.fenrir.xtraceprocessor.services.CollectorService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration;
@@ -13,7 +13,7 @@ import org.springframework.context.ConfigurableApplicationContext;
                 MongoDataAutoConfiguration.class
         },
         scanBasePackages = {
-                "com.github.fenrir.xservicedependency",
+                "com.github.fenrir.xtraceprocessor",
                 "com.github.fenrir.prometheusclient"
         }
 )
@@ -22,6 +22,6 @@ public class XTraceProcessorApplication {
 
     static public void main(String[] args){
         context = SpringApplication.run(XTraceProcessorApplication.class);
-        context.getBean(ReceiveService.class).startup();
+        context.getBean(CollectorService.class).startup();
     }
 }

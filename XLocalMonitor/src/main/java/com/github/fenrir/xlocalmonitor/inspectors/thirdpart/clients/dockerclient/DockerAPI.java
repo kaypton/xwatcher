@@ -12,7 +12,6 @@ import com.github.dockerjava.core.DockerClientConfig;
 import com.github.dockerjava.httpclient5.ApacheDockerHttpClient;
 import com.github.dockerjava.transport.DockerHttpClient;
 import com.github.fenrir.xlocalmonitor.annotations.Inspector;
-import com.mongodb.management.ConnectionPoolStatisticsMBean;
 import lombok.Getter;
 import lombok.Setter;
 import org.slf4j.Logger;
